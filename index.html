@@ -1,44 +1,260 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to My Homepage</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-        .highlight {
-            background-color: #e74c3c;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            display: inline-block;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>BeauxOS — The AI Operating System for Business</title>
+  <meta name="description" content="BeauxOS installs AI across your operations to increase revenue, reduce costs, and automate workflows." />
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=" />
+  <!-- Tailwind Play CDN for zero-build styling -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Minimal extras */
+    html { scroll-behavior: smooth; }
+    .glass { backdrop-filter: blur(10px); background: rgba(255,255,255,0.06); }
+    .container { max-width: 1100px; }
+  </style>
 </head>
-<body>
-    <div class="container">
-        <h1>Welcome to My Homepage</h1>
-        <p>Hello and welcome to my personal website!</p>
-        <p>I am <span class="highlight">passionate</span> about web development and creating beautiful, functional websites.</p>
-        <p>Feel free to explore and get in touch!</p>
+<body class="bg-black text-white antialiased">
+  <!-- Mobile Nav Toggle -->
+  <script>
+    function toggleNav() {
+      const m = document.getElementById('mobileMenu');
+      m.classList.toggle('hidden');
+    }
+    // Show success banner if redirected with ?success=1
+    (function () {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('success') === '1') {
+        document.addEventListener('DOMContentLoaded', () => {
+          const s = document.getElementById('successBanner');
+          if (s) s.classList.remove('hidden');
+        });
+      }
+    })();
+  </script>
+
+  <!-- Sticky Nav -->
+  <header class="sticky top-0 z-50 border-b border-white/10 bg-black/70 glass">
+    <nav class="container mx-auto flex items-center justify-between px-4 py-4">
+      <a href="#top" class="text-xl font-semibold tracking-tight">Beaux<span class="text-white/60">OS</span></a>
+      <div class="hidden md:flex gap-8 text-white/80">
+        <a href="#services" class="hover:text-white">Services</a>
+        <a href="#pricing" class="hover:text-white">Pricing</a>
+        <a href="#process" class="hover:text-white">Process</a>
+        <a href="#contact" class="hover:text-white">Contact</a>
+      </div>
+      <div class="hidden md:block">
+        <a href="#contact" class="rounded-xl bg-white text-black px-4 py-2 font-medium hover:bg-white/90">Book Intro</a>
+      </div>
+      <button class="md:hidden border border-white/20 rounded-lg px-3 py-2" onclick="toggleNav()" aria-label="Open Menu">Menu</button>
+    </nav>
+    <div id="mobileMenu" class="md:hidden hidden border-t border-white/10">
+      <div class="px-4 py-3 flex flex-col gap-3 bg-black/90">
+        <a href="#services" class="text-white/80 hover:text-white" onclick="toggleNav()">Services</a>
+        <a href="#pricing" class="text-white/80 hover:text-white" onclick="toggleNav()">Pricing</a>
+        <a href="#process" class="text-white/80 hover:text-white" onclick="toggleNav()">Process</a>
+        <a href="#contact" class="text-white/80 hover:text-white" onclick="toggleNav()">Contact</a>
+        <a href="#contact" class="rounded-lg bg-white text-black px-4 py-2 font-medium text-center" onclick="toggleNav()">Book Intro</a>
+      </div>
     </div>
+  </header>
+
+  <!-- Success Banner -->
+  <div id="successBanner" class="hidden">
+    <div class="container mx-auto px-4">
+      <div class="mt-4 rounded-lg bg-emerald-500/15 border border-emerald-400/30 p-4 text-emerald-200">
+        ✅ Message received. We’ll be in touch shortly.
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section id="top" class="relative overflow-hidden">
+    <div class="absolute inset-0 -z-10 opacity-30"
+         style="background: radial-gradient(60% 60% at 50% 20%, #22d3ee33 0%, transparent 60%), radial-gradient(40% 40% at 80% 80%, #a78bfa33 0%, transparent 60%);">
+    </div>
+    <div class="container mx-auto px-4 py-24 md:py-32 text-center">
+      <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+        The AI Operating System<br class="hidden md:block" />
+        for Modern Businesses
+      </h1>
+      <p class="mt-5 text-white/70 max-w-2xl mx-auto">
+        BeauxOS installs AI across your email, calls, logistics, and workflows—boosting revenue, cutting costs,
+        and compounding intelligence with every client.
+      </p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="#contact" class="rounded-xl bg-white text-black px-6 py-3 font-medium hover:bg-white/90">Get a Proposal</a>
+        <a href="#services" class="rounded-xl border border-white/20 px-6 py-3 font-medium hover:bg-white/5">Explore Services</a>
+      </div>
+      <p class="mt-6 text-xs text-white/50">Secure. Private. Deployed on your own server under the BeauxOS system.</p>
+    </div>
+  </section>
+
+  <!-- Logos / social proof (placeholder) -->
+  <section class="py-8 border-t border-white/10">
+    <div class="container mx-auto px-4 text-center text-white/50 text-sm">
+      Trusted by growth-focused operators in healthcare, home services, B2B, and ecommerce.
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-20 border-t border-white/10">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Services</h2>
+      <p class="mt-2 text-white/60 max-w-2xl">
+        Each engagement targets hard ROI: more booked revenue, lower cost-to-service, and faster cycle times.
+      </p>
+
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-white/10 glass">
+          <h3 class="text-xl font-semibold mb-2">AI Lead Engine</h3>
+          <p class="text-white/70 text-sm">Outbound + inbound AI agents that qualify, schedule, and follow up across SMS, email, and voice.</p>
+          <ul class="mt-4 text-white/60 text-sm list-disc list-inside">
+            <li>ICP research & list building</li>
+            <li>Omni-channel outreach</li>
+            <li>Calendar routing & show-up boosts</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-2xl border border-white/10 glass">
+          <h3 class="text-xl font-semibold mb-2">Ops Automation</h3>
+          <p class="text-white/70 text-sm">Connect AI to email servers, phone recordings, tickets, and logistics to automate repetitive ops.</p>
+          <ul class="mt-4 text-white/60 text-sm list-disc list-inside">
+            <li>Inbox triage & drafting</li>
+            <li>Call analysis & QA</li>
+            <li>CRM & ERP workflow bots</li>
+          </ul>
+        </div>
+        <div class="p-6 rounded-2xl border border-white/10 glass">
+          <h3 class="text-xl font-semibold mb-2">Analytics OS</h3>
+          <p class="text-white/70 text-sm">Private, unified data layer + dashboards that learn how your business runs and recommend actions.</p>
+          <ul class="mt-4 text-white/60 text-sm list-disc list-inside">
+            <li>KPI observability</li>
+            <li>Forecasting & anomaly alerts</li>
+            <li>Playbooks & auto-execution</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section id="pricing" class="py-20 border-t border-white/10">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Pricing</h2>
+      <p class="mt-2 text-white/60 max-w-2xl">Transparent retainers aligned to ROI. Custom pricing available for complex environments.</p>
+
+      <div class="mt-10 grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl border border-white/10 glass">
+          <h3 class="text-xl font-semibold">Launch</h3>
+          <p class="text-3xl font-bold mt-2">$5k<span class="text-base font-medium text-white/60"> /mo</span></p>
+          <ul class="mt-4 text-sm text-white/70 space-y-2">
+            <li>Lead Engine basic (email+SMS)</li>
+            <li>Ops automations (3 workflows)</li>
+            <li>Analytics OS starter</li>
+            <li>Weekly reporting</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block rounded-lg bg-white text-black px-4 py-2 font-medium">Start</a>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-white/10 glass ring-1 ring-white/20">
+          <h3 class="text-xl font-semibold">Scale</h3>
+          <p class="text-3xl font-bold mt-2">$12k<span class="text-base font-medium text-white/60"> /mo</span></p>
+          <ul class="mt-4 text-sm text-white/70 space-y-2">
+            <li>Lead Engine pro (email+SMS+voice)</li>
+            <li>Ops automations (8 workflows)</li>
+            <li>Analytics OS + forecasting</li>
+            <li>ABM + landing funnels</li>
+            <li>Dedicated success manager</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block rounded-lg bg-white text-black px-4 py-2 font-medium">Scale</a>
+        </div>
+
+        <div class="p-6 rounded-2xl border border-white/10 glass">
+          <h3 class="text-xl font-semibold">Enterprise</h3>
+          <p class="text-3xl font-bold mt-2">Custom</p>
+          <ul class="mt-4 text-sm text-white/70 space-y-2">
+            <li>Private cloud (VPC) deployment</li>
+            <li>Compliance + SSO/SAML</li>
+            <li>Unlimited workflows/agents</li>
+            <li>On-site enablement</li>
+          </ul>
+          <a href="#contact" class="mt-6 inline-block rounded-lg bg-white text-black px-4 py-2 font-medium">Talk to Sales</a>
+        </div>
+      </div>
+      <p class="mt-6 text-xs text-white/50">All plans: 90-day ROI target; cancel any time after initial term.</p>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section id="process" class="py-20 border-t border-white/10">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Deployment Process</h2>
+      <div class="mt-8 grid md:grid-cols-4 gap-6">
+        <div class="p-6 rounded-2xl border border-white/10 glass">
+          <h3 class="font-semibold mb-1">1) Discovery</h3>
+          <p class="text-white/70 text-sm">Call recording + AI maps pain points and quick wins.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-white/10 glass">
+          <h3 class="font-semibold mb-1">2) Install</h3>
+          <p class="text-white/70 text-sm">Connect inboxes, phones, CRM/ERP, logistics; deploy agents.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-white/10 glass">
+          <h3 class="font-semibold mb-1">3) Optimize</h3>
+          <p class="text-white/70 text-sm">Weekly experiments on messaging, routing, and automation.</p>
+        </div>
+        <div class="p-6 rounded-2xl border border-white/10 glass">
+          <h3 class="font-semibold mb-1">4) Scale</h3>
+          <p class="text-white/70 text-sm">Add workflows, new channels, and advanced analytics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 border-t border-white/10">
+    <div class="container mx-auto px-4 max-w-2xl">
+      <h2 class="text-3xl md:text-4xl font-semibold tracking-tight">Contact</h2>
+      <p class="mt-2 text-white/60">Tell us about your goals. We’ll reply with a custom plan and ROI model.</p>
+
+      <!-- FormSubmit integration: sends to your email without server code -->
+      <form
+        action="https://formsubmit.co/justin@beaucollective.com"
+        method="POST"
+        class="mt-8 grid gap-4"
+      >
+        <!-- FormSubmit options -->
+        <input type="hidden" name="_subject" value="New BeauxOS Inquiry" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" class="hidden" style="display:none" />
+        <input type="hidden" name="_next" value="/?success=1" />
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <input name="name" required placeholder="Full name" class="bg-white/5 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-white/30" />
+          <input name="email" type="email" required placeholder="Work email" class="bg-white/5 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-white/30" />
+        </div>
+        <input name="company" placeholder="Company" class="bg-white/5 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-white/30" />
+        <textarea name="message" required placeholder="What are you trying to achieve?" rows="5" class="bg-white/5 border border-white/10 rounded-lg px-4 py-3 outline-none focus:border-white/30"></textarea>
+
+        <button type="submit" class="rounded-xl bg-white text-black px-6 py-3 font-medium w-fit">
+          Send Message
+        </button>
+        <p class="text-xs text-white/50">Or email <a class="underline" href="mailto:justin@beaucollective.com">justin@beaucollective.com</a></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-white/10 py-10">
+    <div class="container mx-auto px-4 text-sm text-white/50 flex flex-col md:flex-row items-center justify-between gap-2">
+      <div>© <span id="y"></span> BeauxOS • All rights reserved</div>
+      <div class="flex gap-4">
+        <a href="#services" class="hover:text-white">Services</a>
+        <a href="#pricing" class="hover:text-white">Pricing</a>
+        <a href="#contact" class="hover:text-white">Contact</a>
+      </div>
+    </div>
+    <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+  </footer>
 </body>
 </html>
