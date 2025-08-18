@@ -1,217 +1,313 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BeauxOS - The AI Operating System for Business</title>
-  <meta name="description" content="BeauxOS automates, optimizes, and future-proofs business operations through AI-powered analytics, lead gen, chatbots, reminders, and custom integrations for SMEs.">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>BeauxOS — AI That Runs Your Back Office | Book More. Work Less.</title>
+  <meta name="description" content="AI phone/text/email agent, bookings, follow-ups & full company automation. Future-proof your business. Add 10+ appointments and $5k revenue—money-back pilot." />
+  <meta name="theme-color" content="#0D1020" />
+
+  <!-- Social / OG; swap image files for actual graphics per industry! -->
+  <meta property="og:title" content="BeauxOS — AI That Runs Your Back Office | Book More. Work Less." />
+  <meta property="og:description" content="Add 10+ appointments and $5,000 revenue in your first month—or your money back. Experience BeauxOS: AI that works 24/7." />
+  <meta property="og:image" content="/og-general.jpg" id="ogImage" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  
   <style>
-    .hero-bg {
-      background: linear-gradient(105deg, #22223b 0, #f2e9e4 100%);
-      color: #22223b;
-      padding: 70px 0 50px 0;
+    :root{
+      --primary:#5cc8ff;
+      --primary2:#2ba7ee;
+      --ok:#50e3c2;
+      --muted:#8babbe;
+      --accent:#e4ffda;
+      --bg:#10182b;
+      --bg-gr:#161e33;
+      --card:#18223a;
+      --border:#26365A;
+      --shadow:0 12px 32px #0006;
+      --radius:16px;
+      --max:1080px;
     }
-    .brand { font-weight: 700; letter-spacing: 1px; color: #4a4e69;}
-    .cta-btn { background: #9a8c98; border: none; color: #fff; }
-    .cta-btn:hover { background: #4a4e69;}
-    .service-icon { font-size: 2.2rem; color: #9a8c98;}
-    .plan-card { background: #f2e9e4; border-radius: 14px; padding: 25px 20px; margin-bottom: 30px; box-shadow: 0px 2px 15px 0 rgb(130 130 130 / 6%);}
-    .plan-feature { color: #22223b; }
-    .footer-bg { background: #22223b; color: #f2e9e4; }
+    *{box-sizing:border-box}
+    body{
+      font-family:'Inter',sans-serif;
+      margin:0; color:#f5faff;
+      background:
+        radial-gradient(100vw 60vh at 95% 0%,rgba(92,200,255,.12),transparent 70%),
+        linear-gradient(120deg,var(--bg),var(--bg-gr) 90%);
+    }
+    a{color:var(--primary2);}
+    .container{max-width:var(--max);margin:0 auto;padding:0 20px}
+    .nav{background:rgba(16,24,43,.7);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;}
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px;}
+    .logo{width:44px;height:44px;border-radius:12px;background:linear-gradient(120deg,#2ba7ee,#5cc8ff 80%);box-shadow:var(--shadow);display:grid;place-items:center;font-weight:800;color:#00103a;font-size:2rem}
+    .hero{padding:80px 0 40px;}
+    .heroRow{display:flex;flex-wrap:wrap;gap:40px;align-items:center}
+    .hero-copy{flex:1;}
+    .eyebrow{font-size:.95rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ok);font-weight:bold}
+    h1{font-size:2.8rem;font-weight:800;margin:.5rem 0 1rem;letter-spacing:-2px;}
+    h2{font-size:2rem;margin:0 0 0.8em;}
+    .hero p{color:var(--muted);font-size:1.22rem;margin-bottom:1.4em;}
+    .selectors{display:flex;gap:12px;margin-bottom:14px;}
+    .sel{padding:8px 11px;border:1px solid var(--border);border-radius:12px;font-size:1rem;background:var(--card);color:#fff;}
+    .cta-row{display:flex;gap:18px;align-items:center;margin-bottom:.5em;}
+    .cta{background:linear-gradient(90deg,var(--primary),var(--primary2));color:#00102d;font-weight:800;font-size:1.18rem;padding:15px 34px;border-radius:18px;text-decoration:none;box-shadow:var(--shadow);}
+    .card{background:var(--card);border-radius:var(--radius);padding:2.2em 2em 2em;box-shadow:var(--shadow);border:1px solid var(--border);}
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin:14px 0;}
+    .kbd{background:#173256;padding:6px 11px;border-radius:8px;font-size:12px;color:var(--accent)}
+    .results{display:flex;flex-wrap:wrap;gap:24px;justify-content:space-between;margin:34px 0;}
+    .result{flex:1 1 220px;background:rgba(82,205,255,.06);border-radius:16px;padding:18px 18px 14px;}
+    .result .stat{font-size:2.2rem;font-weight:800;color:var(--primary)}
+    .result label{color:var(--muted);display:block;margin-top:2px;}
+    section{padding:46px 0}
+    h3.section-title{font-size:1.38rem;letter-spacing:.03em;margin-bottom:0.6em;}
+    .grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;}
+    .feature{font-size:1.08em;margin-bottom:1em;}
+    .feature::before{content:"✓ ";color:var(--ok);}
+    ul{color:var(--muted);margin:0 0 1em 1.4em;}
+    .trust-strip{display:flex;gap:12px;margin:18px 0;}
+    .pill{background:rgba(50,90,190,.19);border-radius:999px;padding:8px 14px;font-size:13px;color:#cfe1ff;}
+    .formsec{padding:42px 0;}
+    .lead-form{max-width:500px;}
+    .field-group{display:flex;gap:10px;}
+    label{font-size:14px;}
+    input,select,textarea{margin-top:4px;background:var(--bg);border:1px solid var(--border);color:#fff;font-size:1em;padding:12px 10px;border-radius:8px;}
+    input:focus,select:focus,textarea:focus{border-color:var(--primary)}
+    .success,.error{display:none;padding:14px;margin:10px 0;border-radius:12px;}
+    .success{background:#113c2c;border:1px solid #20e194;color:#b6ffda;}
+    .error{background:#33181d;border:1px solid #ffb2bc;color:#ffd0dd;}
+    .calendly-card{max-width:560px;margin:24px auto;}
+    .footer{color:#92b4d2;background:#0f111e;padding:30px 0 18px;border-top:1px solid #232c48;text-align:center;font-size:15px;}
+    .footer a{color:var(--primary)}
+    @media (max-width:980px){.heroRow{flex-direction:column}.hero-copy{width:100%;}}
   </style>
 </head>
 <body>
-
-<!-- HEADER -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light py-3">
-  <div class="container">
-    <a class="navbar-brand brand" href="#">BeauxOS</a>
-    <span class="d-none d-lg-inline ms-auto">Empowering Autonomous Business</span>
-    <a href="#contact" class="btn cta-btn ms-3 d-none d-lg-block">Book a Demo</a>
-  </div>
-</nav>
-
-<!-- HERO SECTION -->
-<section class="hero-bg text-center">
-  <div class="container">
-    <h1 class="display-4 mb-3 fw-bold">AI Operating System for Businesses</h1>
-    <p class="lead mb-4">Boost revenue, cut costs, and future-proof your company with plug-and-play AI: analytics, chatbots, reminders, lead gen, & self-improving automations.</p>
-    <a href="#contact" class="btn cta-btn btn-lg">Start Your AI Transformation</a>
-  </div>
-</section>
-
-<!-- SERVICES -->
-<section id="services" class="py-5">
-  <div class="container">
-    <h2 class="mb-4 text-center">What BeauxOS Delivers</h2>
-    <div class="row g-4">
-
-      <div class="col-md-4">
-        <div class="plan-card h-100 text-center">
-          <span class="service-icon mb-2">&#128222;</span>
-          <h5 class="mb-2">AI Call Listening &#38; Feedback</h5>
-          <p class="plan-feature">Transcribe calls, deliver customer insights, and boost team performance with AI coaching.</p>
-        </div>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div style="display:flex;align-items:center;gap:14px">
+        <div class="logo">B</div>
+        <span style="font-size:1.3rem;font-weight:700;">BeauxOS</span>
       </div>
-      <div class="col-md-4">
-        <div class="plan-card h-100 text-center">
-          <span class="service-icon mb-2">&#128172;</span>
-          <h5 class="mb-2">Automated Reminders &#38; Messaging</h5>
-          <p class="plan-feature">Reduce no-shows and increase follow-ups with AI-powered texts and emails.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="plan-card h-100 text-center">
-          <span class="service-icon mb-2">&#129302;</span>
-          <h5 class="mb-2">AI Chatbots &#38; Phone Bots</h5>
-          <p class="plan-feature">Chatbot/IVR support solves 70%+ of inquiries, 24/7, improving CX and staff productivity.</p>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="plan-card h-100 text-center">
-          <span class="service-icon mb-2">&#128200;</span>
-          <h5 class="mb-2">ROI Dashboard &#38; Analytics</h5>
-          <p class="plan-feature">Live metrics: revenue uplift, hours saved, lead conversion, and automation impact.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="plan-card h-100 text-center">
-          <span class="service-icon mb-2">&#128176;</span>
-          <h5 class="mb-2">AI Lead Gen &#38; Outreach</h5>
-          <p class="plan-feature">BeauxOS finds high-value leads and launches personalized campaigns for you, proving ROI.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="plan-card h-100 text-center">
-          <span class="service-icon mb-2">&#9881;</span>
-          <h5 class="mb-2">Full Business Integrations</h5>
-          <p class="plan-feature">Custom automations, robot-ready data, and "future proof" ML—scale to full autonomy.</p>
-        </div>
-      </div>
+      <a class="cta" href="#book">Start for Free</a>
     </div>
-  </div>
-</section>
+  </nav>
 
-<!-- PRICING PLANS -->
-<section class="py-5 bg-light" id="pricing">
-  <div class="container">
-    <h2 class="mb-4 text-center">Service Tiers & Pricing</h2>
-    <div class="row justify-content-center g-4">
-      <div class="col-md-3">
-        <div class="plan-card text-center">
-          <h4>Basic</h4>
-          <div class="display-5 fw-bold mb-3">$2,500<span class="fs-6">/mo</span></div>
-          <ul class="list-unstyled">
-            <li>Reminders & Messaging</li>
-            <li>Call Transcription</li>
-            <li>Live Analytics Dashboard</li>
-          </ul>
-          <a href="#contact" class="btn cta-btn mt-3">Start Basic</a>
+  <main>
+    <section class="hero">
+      <div class="container heroRow">
+        <div class="hero-copy">
+          <div class="eyebrow">AI For Real Business Outcomes</div>
+          <h1 id="heroHead">Automate Your Calls, Bookings & Back Office—Add Revenue In 14 Days</h1>
+          <p id="heroSub">
+            BeauxOS answers your phone, handles texts/emails, books clients, and runs your back office—so you work less but make more. Most businesses add 12+ booked appointments and recover $5,000 in missed revenue their very first month. <b>14‑Day Money Back Pilot.</b>
+          </p>
+          <div class="selectors">
+            <select class="sel" id="industry">
+              <option value="general">Choose Industry...</option>
+              <option value="home">Home Services</option>
+              <option value="realestate">Real Estate</option>
+              <option value="beauty">Beauty & Wellness</option>
+              <option value="coaching">Coaching & Consulting</option>
+              <option value="enterprise">Enterprise / Multi‑Location</option>
+              <option value="allinclusive">All‑Inclusive (Everything BeauxOS)</option>
+            </select>
+            <select class="sel" id="profile">
+              <option value="solo">Solo / Small Team</option>
+              <option value="growth">Growth Business</option>
+              <option value="enterprise">Enterprise / Multi-Location</option>
+            </select>
+          </div>
+          <div class="cta-row">
+            <a class="cta" href="#book">Book My ROI Audit</a>
+            <a href="#how" class="cta" style="background:none;color:var(--primary);box-shadow:none;">See How It Works</a>
+          </div>
+          <div class="badges">
+            <span class="kbd">Money-back 14‑day pilot</span>
+            <span class="kbd">Works for solo pros and enterprise</span>
+            <span class="kbd">Private & encrypted</span>
+          </div>
+        </div>
+        <div style="flex:1;min-width:310px;">
+          <div class="card" style="padding:44px 28px 28px;text-align:center;">
+            <h3 style="font-weight:700;margin-top:0;">Attainable Results</h3>
+            <div class="results">
+              <div class="result">
+                <span class="stat" id="r1">+12</span>
+                <label>New Booked Appointments <br />in First Month</label>
+              </div>
+              <div class="result">
+                <span class="stat" id="r2">+$5,000</span>
+                <label>Missed Revenue Recovered</label>
+              </div>
+              <div class="result">
+                <span class="stat" id="r3">96%</span>
+                <label>Incoming Calls Answered by AI</label>
+              </div>
+            </div>
+            <div style="color:var(--muted);font-size:13px;margin-top:8px;">
+              *Typical first-month results. Your wins may vary. Full money-back guarantee on all pilots.
+            </div>
+          </div>
         </div>
       </div>
-      <div class="col-md-3">
-        <div class="plan-card text-center">
-          <h4>Standard</h4>
-          <div class="display-5 fw-bold mb-3">$5,000<span class="fs-6">/mo</span></div>
-          <ul class="list-unstyled">
-            <li>All Basic Services</li>
-            <li>AI Lead Gen & Outreach</li>
-            <li>Advanced Chatbot/Phone Bot</li>
-            <li>Reporting & Optimization</li>
-          </ul>
-          <a href="#contact" class="btn cta-btn mt-3">Start Standard</a>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="plan-card text-center">
-          <h4>Premium</h4>
-          <div class="display-5 fw-bold mb-3">$8,000<span class="fs-6">/mo</span></div>
-          <ul class="list-unstyled">
-            <li>All Standard Services</li>
-            <li>Custom AI Integrations</li>
-            <li>Self-Improving Agents</li>
-            <li>Dedicated Support</li>
-          </ul>
-          <a href="#contact" class="btn cta-btn mt-3">Start Premium</a>
-        </div>
-      </div>
-      <div class="col-md-3">
-        <div class="plan-card text-center border border-2 border-warning">
-          <h4>Full Integration</h4>
-          <div class="display-6 fw-bold mb-3">from $10k<span class="fs-6">/mo</span></div>
-          <ul class="list-unstyled">
-            <li>Enterprise Integration</li>
-            <li>ML Models & Robotics Ready</li>
-            <li>Private Cloud/On-Premise</li>
-            <li>ROI: 400–800% attainable</li>
-          </ul>
-          <a href="#contact" class="btn cta-btn mt-3">Book Consult</a>
-        </div>
-      </div>
-    </div>
-    <div class="text-center mt-3"><small>*Startup $500–2,000 setup fee may apply to some plans.</small></div>
-  </div>
-</section>
+    </section>
 
-<!-- WHY US/RESULTS -->
-<section class="py-5">
-  <div class="container">
-    <div class="row align-items-center">
-      <div class="col-md-7">
-        <h3 class="fw-bold mb-3">Why BeauxOS?</h3>
+    <section>
+      <div class="container">
+        <h3 class="section-title">How It Works</h3>
+        <div class="grid3">
+          <div class="card feature" id="how1">AI answers every call, texts, and email. Never lose a lead—24/7/365.</div>
+          <div class="card feature" id="how2">Books clients directly into your calendar. Handles follow-ups and reminders automatically.</div>
+          <div class="card feature" id="how3">Personalizes replies and sequences for your business, brand, and clients—no manual setup needed.</div>
+          <div class="card feature" id="how4">Tracks every appointment, lead, and dollar—reporting back to you every week.</div>
+          <div class="card feature" id="how5">You keep full privacy: data is encrypted, never used to train outside models, and never resold.</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h3 class="section-title">Choose Your Plan</h3>
+        <div class="grid3">
+          <div class="card">
+            <div style="font-weight:700">Starter</div>
+            <ul>
+              <li>AI answers & books missed calls + texts</li>
+              <li>Review engine + basic email follow-ups</li>
+              <li>ROI dashboard (leads, booked appointments, revenue)</li>
+            </ul>
+            <div style="font-size:1.3em;font-weight:800;margin:14px 0;">$1,500/mo</div>
+            <a class="cta" href="#book">Get Started →</a>
+          </div>
+          <div class="card">
+            <div style="font-weight:700">Growth</div>
+            <ul>
+              <li>Everything in Starter</li>
+              <li>AI scheduling & calendar orchestration</li>
+              <li>Location‑aware schedule suggestions</li>
+              <li>CRM integration & reporting</li>
+              <li>Quote follow‑ups, warranty/reminder automation</li>
+            </ul>
+            <div style="font-size:1.3em;font-weight:800;margin:14px 0;">$3–5k/mo</div>
+            <a class="cta" href="#book">Scale with Growth →</a>
+          </div>
+          <div class="card" style="background:linear-gradient(135deg,#101732 85%,#223c63 100%);">
+            <div style="font-weight:700">Flagship</div>
+            <ul>
+              <li>Every BeauxOS feature: AI handles phone, sms, email—plus inventory, analytics & more</li>
+              <li>Multi-location/enterprise: all integrations, advanced reporting, dedicated compliance</li>
+              <li>Monthly executive reviews & scenario planning</li>
+              <li>Money-back guarantee, dedicated support</li>
+            </ul>
+            <div style="font-size:1.3em;font-weight:800;margin:14px 0;">$15–25k/mo</div>
+            <a class="cta" href="#book">Apply for Flagship →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-sec">
+      <div class="container">
+        <h3 class="section-title">Privacy & Trust by Design</h3>
+        <div class="trust-strip">
+          <span class="pill">Your data, your vault—never resold</span>
+          <span class="pill">Encryption at rest and in transit</span>
+          <span class="pill">SOC2 & DPA ready</span>
+          <span class="pill">Consent recordings only</span>
+          <span class="pill">Money‑back pilot</span>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h3 class="section-title">Why Switch to AI-Driven Ops Now?</h3>
         <ul>
-          <li><strong>20–50% more booked revenue</strong> and <strong>25% reduction in no-shows</strong></li>
-          <li>70% of inbound queries auto-solved</li>
-          <li>Outreach that delivers leads—<span style="color:#9a8c98;">BeauxOS finds your next client</span></li>
-          <li>Fully secure, encrypted, & compliant.<br>On-premise/Private Cloud options available.</li>
-          <li>Data & automations are <strong>robot-ready</strong> for future upgrades.</li>
+          <li>Businesses that use AI to capture leads and automate scheduling are closing more deals than their competitors—across all industries.</li>
+          <li>Be the first in your market to offer instant bookings, always-on follow-ups, and data-driven growth.</li>
+          <li>Experience the simplest onboarding and lowest risk—<b>if you’re not blown away, you pay nothing for your first 14 days.</b></li>
         </ul>
       </div>
-      <div class="col-md-5">
-        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=700&q=80" class="img-fluid rounded shadow" alt="BeauxOS dashboard sample" />
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
-<!-- CONTACT/CTA -->
-<section class="py-5 bg-light" id="contact">
-  <div class="container">
-    <div class="text-center mb-4">
-      <h2 class="fw-bold">Ready to Lead Your Industry?</h2>
-      <p>Book a free consult/demo. See how BeauxOS can start transforming your revenue & operations this week.</p>
-    </div>
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <form action="https://formspree.io/f/mvolwkra" method="POST" class="p-4 plan-card">
-          <div class="mb-3">
-            <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-          </div>
-          <div class="mb-3">
-            <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-          </div>
-          <div class="mb-3">
-            <input type="text" name="company" class="form-control" placeholder="Your Company" required>
-          </div>
-          <div class="mb-3">
-            <textarea name="message" class="form-control" rows="3" placeholder="How can BeauxOS help you?"></textarea>
-          </div>
-          <button type="submit" class="btn cta-btn w-100">Request a Demo</button>
-          <div class="mt-2 text-muted" style="font-size:0.95em;">We reply within 1 business day.</div>
-        </form>
+    <section class="formsec" id="book">
+      <div class="container" style="display:flex;flex-wrap:wrap;gap:32px;justify-content:space-between;">
+        <div class="lead-form" style="flex:1;">
+          <h3 style="margin-bottom:0.5em;">Start Your Free Pilot</h3>
+          <div id="success" class="success">Thank you! We received your details. Scroll down to pick your slot →</div>
+          <div id="error" class="error">Error. Please check your info and try again.</div>
+          <form id="leadForm" novalidate>
+            <div class="field-group">
+              <div style="flex:1"><label>Name</label><input name="name" required /></div>
+              <div style="flex:1"><label>Company</label><input name="company" required /></div>
+            </div>
+            <div class="field-group">
+              <div style="flex:1"><label>Email</label><input name="email" type="email" required /></div>
+              <div style="flex:1"><label>Phone</label><input name="phone" required /></div>
+            </div>
+            <div><label>Your Industry</label><select name="industry"><option>General</option><option>Home Services</option><option>Real Estate</option><option>Beauty</option><option>Coaching</option><option>Enterprise</option></select></div>
+            <div><label>What’s your #1 goal?</label><input name="goal" placeholder="ex: More bookings, less admin, etc."/></div>
+            <div><button class="cta" type="submit" style="width:100%;margin-top:14px;">Send & Book My Audit</button></div>
+          </form>
+        </div>
+        <div class="calendly-card card" style="flex:1;">
+          <h3 style="margin-bottom:0;">Book Your 15‑Min ROI Audit</h3>
+          <div class="calendly-inline-widget" data-url="https://calendly.com/justinatchley3/future-proofing-audit-20-minutes" style="min-width:310px;height:630px"></div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
+  </main>
+  <footer class="footer">
+    BeauxOS © <span id="y"></span> — <a href="mailto:hello@beaucollective.com">hello@beaucollective.com</a><br>
+    <span style="color:#66c0ff">“Your business, future‑proofed. Zero hassle.”</span>
+  </footer>
+  <script src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
 
-<!-- FOOTER -->
-<footer class="footer-bg py-4 mt-5">
-  <div class="container text-center">
-    <div class="mb-2">BeauxOS &copy; 2025&nbsp;&bull;&nbsp;<a href="mailto:justinatchley3@gmail.com" class="link-light" style="text-decoration:underline;">Contact Founder</a></div>
-    <small>Built with AI. All rights reserved.</small>
-  </div>
-</footer>
+    // Industry/Profile selection for dynamic copy/stats
+    const copy = {
+      home:  ["+19","$6,400","99%","AI books jobs and handles after-hours calls, so you never miss business."],
+      realestate: ["+10","$7,200","97%","AI schedules showings, texts prospects and nurtures buyers."],
+      beauty:["+17","$5,150","99%","AI handles bookings, fills slow hours, and chases reviews for you."],
+      coaching:["+7","$4,300","95%","AI books clients, follows up payment, automates reminders."],
+      enterprise:["+53","$31k","99.8%","Roll out to all locations. Full governance and custom integrations."],
+      allinclusive:["+43","$23k","99.5%","Every BeauxOS feature in one stack. Concierge onboarding."],
+      general:["+12","$5,000","96%","AI answers calls, handles texts and email, books clients and recovers missed revenue."],
+    };
+    const indSel=document.getElementById('industry'),proSel=document.getElementById('profile');
+    function updateRes(){
+      let v=indSel.value;
+      if(!copy[v])v="general";
+      document.getElementById('r1').textContent=copy[v][0];
+      document.getElementById('r2').textContent=copy[v][1];
+      document.getElementById('r3').textContent=copy[v][2];
+      document.getElementById('heroSub').textContent=copy[v]+" Most businesses add 12+ booked appts and recover $5,000 their first month. 14‑day pilot.";
+      // OG image swap (optional, if images uploaded)
+      var og = document.getElementById('ogImage');
+      if(og){og.setAttribute('content',`/og-${v}.jpg`);}
+    }
+    indSel.addEventListener('change',updateRes);
+    // Profile selection info (can further adjust copy if needed)
+    proSel.addEventListener('change',()=>{ /* Add profile-based adjustment logic here if you want */ });
+
+    // Simple lead form handler—swap in your webhook/Make/Airtable endpoint to receive!
+    let form = document.getElementById('leadForm');
+    let success = document.getElementById('success');
+    let errorBox = document.getElementById('error');
+    form.addEventListener('submit',async function(e){
+      e.preventDefault();
+      errorBox.style.display='none';success.style.display='none';
+      const vals = Array.from(form.elements).reduce((o,e)=>{if(e.name)o[e.name]=e.value;return o;},{});
+      if(!vals.name||!vals.email){errorBox.textContent='Fill out name and email!';errorBox.style.display='block';return;}
+      // Wire up POST below if ready for automation!
+      // await fetch('YOUR_WEBHOOK_URL',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(vals)})
+      success.style.display='block'; form.reset();
+      setTimeout(()=>{success.style.display='none'},4000);
+    });
+  </script>
 </body>
 </html>
