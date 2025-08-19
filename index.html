@@ -1,388 +1,126 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>BeauxOS — AI That Runs Your Business While You Sleep</title>
-  <meta name="description" content="BeauxOS is a plug-and-play AI operating system for SMBs. Recover missed revenue, automate outreach, and track ROI in a live dashboard." />
-  <meta property="og:title" content="BeauxOS — AI That Runs Your Business While You Sleep" />
-  <meta property="og:description" content="Plug-and-play automations, AI outreach, and a live ROI dashboard—privacy-first with your BeauxBox™." />
-  <meta property="og:type" content="website" />
-  <meta name="theme-color" content="#4f46e5" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🅱️</text></svg>">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    :root{
-      --bg:#0b0c10;
-      --card:#0f1117;
-      --subtle:#151823;
-      --text:#e5e7eb;
-      --muted:#a1a1aa;
-      --brand:#645cff;    /* indigo / violet blend */
-      --brand-2:#9a5cff;  /* accent */
-      --ok:#10b981;
-      --warn:#f59e0b;
-      --danger:#ef4444;
-      --ring: 0 0 0 6px color-mix(in srgb, var(--brand) 25%, transparent);
-    }
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,Segoe UI,Roboto,Helvetica,Arial,sans-serif;scroll-behavior:smooth}
-    a{color:inherit;text-decoration:none}
-    .container{max-width:1200px;margin:0 auto;padding:0 24px}
-    .btn{display:inline-flex;align-items:center;gap:.5rem;padding:.9rem 1.2rem;border-radius:14px;font-weight:700;background:var(--brand);color:white;border:1px solid #6b67ff;box-shadow:0 10px 24px rgba(100,92,255,.25);transition:.2s transform,.2s box-shadow}
-    .btn:hover{transform:translateY(-1px);box-shadow:0 16px 36px rgba(100,92,255,.35)}
-    .btn.ghost{background:transparent;border:1px solid #2b2f3a;color:var(--text)}
-    .pill{display:inline-block;background:linear-gradient(90deg,var(--brand),var(--brand-2));padding:.35rem .7rem;border-radius:999px;font-size:.8rem;font-weight:700}
-    .muted{color:var(--muted)}
-    .badge{display:inline-flex;align-items:center;gap:.4rem;background:#101422;border:1px solid #1e2233;padding:.4rem .6rem;border-radius:12px;font-size:.85rem}
-    .grid{display:grid;gap:20px}
-    .hero{
-      padding:110px 0 80px;
-      background:
-        radial-gradient(1200px 500px at 70% -20%, rgba(153,94,255,.35), transparent 60%),
-        radial-gradient(900px 400px at 0% 0%, rgba(100,92,255,.25), transparent 70%),
-        linear-gradient(180deg, #0b0c10 0%, #0b0c10 60%, #0b0c10 100%);
-      position:relative;overflow:hidden
-    }
-    .hero h1{font-size: clamp(34px, 5vw, 64px); line-height:1.05; margin:0 0 12px; letter-spacing:-.02em}
-    .hero p{font-size: clamp(16px, 2.5vw, 20px); color:#c7c9d1; margin:0 0 28px}
-    .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
-
-    .card{background:var(--card);border:1px solid #1b1f2c;border-radius:20px;padding:22px}
-    .card-lg{padding:28px;border-radius:22px}
-    .section{padding:80px 0}
-    .section h2{font-size: clamp(26px, 4vw, 42px);letter-spacing:-.015em;margin:0 0 10px}
-    .section p.lead{font-size:18px;color:#c7c9d1;margin:0 0 24px}
-
-    .steps{grid-template-columns: repeat(3,minmax(0,1fr))}
-    .step{background:linear-gradient(180deg,#10131c 0%, #0e121a 100%);border:1px solid #1c2130;border-radius:18px;padding:22px}
-    .step h3{margin:8px 0 6px;font-size:18px}
-    .step .num{width:36px;height:36px;display:inline-flex;align-items:center;justify-content:center;border-radius:10px;background:#14192a;border:1px solid #252a3a;color:#9aa0b4;font-weight:800}
-
-    .metrics{grid-template-columns:repeat(4,1fr)}
-    .metric{background:linear-gradient(180deg,#0e121a,#0c0f17);border:1px solid #1b2030;border-radius:16px;padding:18px;text-align:center}
-    .metric .kpi{font-size:28px;font-weight:800}
-
-    .pricing{grid-template-columns:repeat(4,minmax(0,1fr))}
-    .price{background:linear-gradient(180deg,#0f121b,#0f1117); border:1px solid #1b2030;border-radius:20px;padding:24px;display:flex;flex-direction:column;gap:12px}
-    .price h3{margin:0}
-    .price .amount{font-size:26px;font-weight:800}
-    .price ul{list-style:none;padding:0;margin:6px 0 0;display:flex;flex-direction:column;gap:8px;color:#c7c9d1}
-    .price .cta{margin-top:auto}
-
-    .footer{padding:40px 0;border-top:1px solid #1b1f2c;color:#99a0b3}
-
-    /* Responsive */
-    @media (max-width: 1024px){
-      .steps{grid-template-columns:repeat(2,1fr)}
-      .pricing{grid-template-columns:repeat(2,1fr)}
-      .metrics{grid-template-columns:repeat(2,1fr)}
-    }
-    @media (max-width: 640px){
-      .steps,.pricing,.metrics{grid-template-columns:1fr}
-    }
-
-    /* Fake “SaaS design preview” frame */
-    .browser-frame{
-      background:linear-gradient(180deg,#0c0f17,#0a0d14);
-      border:1px solid #1b2030;border-radius:16px;overflow:hidden
-    }
-    .browser-top{
-      display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid #1b2030;background:#0f121a
-    }
-    .dot{width:10px;height:10px;border-radius:999px}
-    .dot.red{background:#ff5f56}.dot.yellow{background:#ffbd2e}.dot.green{background:#27c93f}
-    .browser-body{padding:20px}
-    .dash-grid{display:grid;grid-template-columns:2.2fr 1.2fr;gap:16px}
-    .panel{background:#0f1117;border:1px solid #1a1f2c;border-radius:14px;padding:14px}
-    .panel h4{margin:0 0 10px;font-size:14px;color:#c0c3cf}
-    .bar{height:9px;border-radius:6px;background:linear-gradient(90deg,var(--brand), var(--brand-2))}
-    .stat{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed #23283a;padding-top:10px;margin-top:10px}
-    .chip{font-size:12px;background:#14192a;border:1px solid #272c3e;padding:4px 8px;border-radius:999px}
-
-    /* Contact form */
-    form label{display:block;margin:10px 0 6px;color:#c7c9d1;font-weight:600}
-    form input, form textarea{
-      width:100%;padding:12px 14px;background:#0f1117;border:1px solid #1b2030;border-radius:12px;color:var(--text);
-      outline:none
-    }
-    form input:focus, form textarea:focus{box-shadow:var(--ring);border-color:#4f46e5}
-    .notice{font-size:12px;color:#9aa0b4}
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BeauxOS – AI Automation for SMBs</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
+<body class="bg-gray-50 text-gray-900">
 
-  <!-- NAV -->
-  <header class="container" style="position:sticky;top:0;z-index:10;background:rgba(11,12,16,.7);backdrop-filter:blur(10px);border-bottom:1px solid #141724">
-    <nav style="display:flex;align-items:center;justify-content:space-between;height:64px;">
-      <a href="#" class="badge" aria-label="BeauxOS home">
-        <strong>BeauxOS</strong><span class="muted">by Beau Collective</span>
-      </a>
-      <div style="display:flex;gap:18px;align-items:center">
-        <a href="#how" class="muted">How it works</a>
-        <a href="#pricing" class="muted">Pricing</a>
-        <a href="#security" class="muted">Security</a>
-        <a href="#contact" class="btn">Book a Demo</a>
-      </div>
-    </nav>
-  </header>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <span class="pill">Private • Modular • ROI-Proven</span>
-      <h1>AI That Runs Your Business While You Sleep</h1>
-      <p>Recover missed revenue, automate outreach and scheduling, and track live ROI inside your private <strong>BeauxBox™</strong>.</p>
-      <div class="hero-cta">
-        <a href="#pricing" class="btn">See Plans</a>
-        <a href="#preview" class="btn ghost">View Dashboard Preview</a>
-      </div>
-      <div style="height:32px"></div>
-      <div class="badge">⚡ Results-first: hours saved, leads won, admin effort cut</div>
+  <!-- Hero Section -->
+  <section class="bg-white">
+    <div class="max-w-7xl mx-auto px-6 py-20 text-center">
+      <h1 class="text-5xl font-bold mb-6">Future-Proof Your Business with <span class="text-blue-600">BeauxOS</span></h1>
+      <p class="text-lg text-gray-600 mb-8">AI-powered automation that saves hours, fills schedules, and scales your revenue — without extra staff.</p>
+      <a href="#pricing" class="px-8 py-4 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition">Book a Demo</a>
     </div>
   </section>
 
-  <!-- METRICS -->
-  <section class="section">
-    <div class="container grid metrics">
-      <div class="metric">
-        <div class="kpi">+40%</div>
-        <div class="muted">More Bookings</div>
-      </div>
-      <div class="metric">
-        <div class="kpi">12 hrs/wk</div>
-        <div class="muted">Admin Time Recovered</div>
-      </div>
-      <div class="metric">
-        <div class="kpi">80%</div>
-        <div class="muted">Calls Handled by Bots</div>
-      </div>
-      <div class="metric">
-        <div class="kpi">100%</div>
-        <div class="muted">Your Data, Your Control</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
-  <section id="how" class="section">
-    <div class="container">
-      <h2>How BeauxOS Works</h2>
-      <p class="lead">Plug in your accounts, clone proven automations, and watch your ROI dashboard light up.</p>
-      <div class="grid steps">
-        <div class="step">
-          <span class="num">1</span>
-          <h3>Connect Securely</h3>
-          <p>OAuth into email, calendar, phone/SMS, CRM. Your <strong>BeauxBox™</strong> keeps data private and portable.</p>
+  <!-- Features Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center mb-12">Why Businesses Choose BeauxOS</h2>
+      <div class="grid md:grid-cols-3 gap-10">
+        <div class="p-6 bg-white rounded-2xl shadow">
+          <h3 class="text-xl font-semibold mb-3">Save Time</h3>
+          <p class="text-gray-600">Cut 10–20 hours/week of admin with reminders, booking automation, and AI summaries.</p>
         </div>
-        <div class="step">
-          <span class="num">2</span>
-          <h3>Automate & Orchestrate</h3>
-          <p>Missed-call recapture, outreach, reminders, summaries—done automatically with AI assistants.</p>
+        <div class="p-6 bg-white rounded-2xl shadow">
+          <h3 class="text-xl font-semibold mb-3">Win More Leads</h3>
+          <p class="text-gray-600">Automated follow-up and smart outreach ensures no call, form, or email goes unanswered.</p>
         </div>
-        <div class="step">
-          <span class="num">3</span>
-          <h3>Prove ROI</h3>
-          <p>Live metrics: hours saved, booked appointments, recovered revenue, and pipeline growth.</p>
+        <div class="p-6 bg-white rounded-2xl shadow">
+          <h3 class="text-xl font-semibold mb-3">Proof of ROI</h3>
+          <p class="text-gray-600">Every client gets a live dashboard showing hours saved, leads captured, and revenue impact.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SaaS DESIGN PREVIEW (DASHBOARD MOCKUP) -->
-  <section id="preview" class="section" style="padding-top:0">
-    <div class="container">
-      <h2>Dashboard Preview</h2>
-      <p class="lead">A clean, modern SaaS interface that clients can log into: calendar, calls, texts, analytics, and automation controls.</p>
+  <!-- Pricing Section -->
+  <section id="pricing" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-12">Choose Your Plan</h2>
+      <div class="grid md:grid-cols-4 gap-8">
 
-      <div class="browser-frame card-lg">
-        <div class="browser-top">
-          <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
-          <span class="muted" style="margin-left:10px">app.beauxos.com</span>
-        </div>
-        <div class="browser-body">
-          <div class="dash-grid">
-            <div class="panel">
-              <h4>Today’s Performance</h4>
-              <div class="bar"></div>
-              <div class="stat">
-                <span>Leads Captured</span><span class="chip">+32</span>
-              </div>
-              <div class="stat">
-                <span>Bookings</span><span class="chip">+14</span>
-              </div>
-              <div class="stat">
-                <span>Hours Saved</span><span class="chip">12.4h</span>
-              </div>
-              <div class="stat">
-                <span>Missed → Recovered</span><span class="chip">67%</span>
-              </div>
-            </div>
-            <div class="panel">
-              <h4>Automations</h4>
-              <div class="chip">Missed Call → SMS</div>
-              <div class="chip">Lead Nurture 7-day</div>
-              <div class="chip">No-Show Rebooker</div>
-              <div class="chip">Winback 30-day</div>
-              <div class="chip">Google Review Ask</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="muted" style="margin-top:10px">This is a vector mockup (no images). You can replace with real screenshots later.</p>
-    </div>
-  </section>
-
-  <!-- PRICING -->
-  <section id="pricing" class="section">
-    <div class="container">
-      <h2>Plans for Every Stage</h2>
-      <p class="lead">Start with Essentials, scale to Full Integration as ROI grows. Setup fee $750–$2,000 (waived for first 3–5 clients).</p>
-      <div class="grid pricing">
-        <div class="price">
-          <h3>Essentials</h3>
-          <div class="amount">$2,500/mo</div>
-          <ul>
-            <li>Reminders & messaging (SMS/email)</li>
-            <li>Booking/calendar sync</li>
-            <li>AI call/text/chat transcriptions</li>
-            <li>ROI dashboard</li>
+        <!-- Essentials -->
+        <div class="p-8 bg-gray-50 rounded-2xl shadow flex flex-col">
+          <h3 class="text-2xl font-semibold mb-4">Essentials</h3>
+          <p class="text-3xl font-bold mb-6">$1,750<span class="text-base font-normal">/mo</span></p>
+          <ul class="text-gray-600 mb-6 space-y-3 text-left">
+            <li>✔ Missed call & form follow-up</li>
+            <li>✔ Booking/calendar sync</li>
+            <li>✔ Appointment reminders</li>
+            <li>✔ AI call/meeting summaries</li>
           </ul>
-          <a href="#contact" class="btn cta">Start</a>
+          <a href="#" class="mt-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Get Started</a>
         </div>
-        <div class="price">
-          <h3>Growth</h3>
-          <div class="amount">$5,000/mo</div>
-          <ul>
-            <li>Everything in Essentials</li>
-            <li>Branded chatbots (web & phone)</li>
-            <li>Lead finding & outreach automations</li>
-            <li>Advanced reporting & analytics</li>
+
+        <!-- Growth -->
+        <div class="p-8 bg-gray-50 rounded-2xl shadow-lg border-2 border-blue-600 flex flex-col">
+          <h3 class="text-2xl font-semibold mb-4 text-blue-600">Growth</h3>
+          <p class="text-3xl font-bold mb-6">$4,500<span class="text-base font-normal">/mo</span></p>
+          <ul class="text-gray-600 mb-6 space-y-3 text-left">
+            <li>✔ Everything in Essentials</li>
+            <li>✔ AI-powered lead gen & outreach</li>
+            <li>✔ Website chatbot (FAQ, booking, capture)</li>
+            <li>✔ Analytics dashboard</li>
+            <li>✔ No-show/cancellation automations</li>
           </ul>
-          <a href="#contact" class="btn cta">Go Growth</a>
+          <a href="#" class="mt-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Most Popular</a>
         </div>
-        <div class="price">
-          <h3>Autonomy</h3>
-          <div class="amount">$8,000/mo</div>
-          <ul>
-            <li>Everything in Growth</li>
-            <li>Custom ML on your data</li>
-            <li>CRM / ERP integrations</li>
-            <li>24/7 lead engine</li>
+
+        <!-- Pro -->
+        <div class="p-8 bg-gray-50 rounded-2xl shadow flex flex-col">
+          <h3 class="text-2xl font-semibold mb-4">Pro</h3>
+          <p class="text-3xl font-bold mb-6">$8,500<span class="text-base font-normal">/mo</span></p>
+          <ul class="text-gray-600 mb-6 space-y-3 text-left">
+            <li>✔ Everything in Growth</li>
+            <li>✔ Multi-channel follow-up (SMS/email/phone)</li>
+            <li>✔ Lead scraping & ICP targeting</li>
+            <li>✔ AI scheduling assistant</li>
+            <li>✔ Branded analytics & ROI reports</li>
+            <li>✔ Internal AI knowledge base</li>
           </ul>
-          <a href="#contact" class="btn cta">Go Autonomy</a>
+          <a href="#" class="mt-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Scale with Pro</a>
         </div>
-        <div class="price">
-          <h3>Full Integration</h3>
-          <div class="amount">$12–20k+/mo</div>
-          <ul>
-            <li>Executive dashboards</li>
-            <li>Cross-channel analytics</li>
-            <li>“Upload & go” multi-location</li>
-            <li>On-prem/private cloud BeauxBox</li>
+
+        <!-- Enterprise -->
+        <div class="p-8 bg-gray-50 rounded-2xl shadow flex flex-col">
+          <h3 class="text-2xl font-semibold mb-4">Enterprise</h3>
+          <p class="text-3xl font-bold mb-6">Custom<span class="text-base font-normal">/mo</span></p>
+          <ul class="text-gray-600 mb-6 space-y-3 text-left">
+            <li>✔ Everything in Pro</li>
+            <li>✔ White-label & branding</li>
+            <li>✔ Team onboarding automation</li>
+            <li>✔ Cross-location reporting</li>
+            <li>✔ Private cloud/on-prem deployment</li>
           </ul>
-          <a href="#contact" class="btn cta">Talk to Sales</a>
+          <a href="#" class="mt-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Contact Sales</a>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- SECURITY -->
-  <section id="security" class="section">
-    <div class="container card-lg">
-      <h2>Privacy & Security by Design</h2>
-      <p class="lead">Every client gets a private, encrypted <strong>BeauxBox™</strong>—data is never mixed or resold. Export or delete anytime.</p>
-      <div class="grid" style="grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:20px">
-        <div class="card">
-          <strong>Private BeauxBox™</strong>
-          <p class="muted">Hard data isolation per client with strict access controls.</p>
-        </div>
-        <div class="card">
-          <strong>Auditable Automations</strong>
-          <p class="muted">Every automation is logged, reviewable, and adjustable.</p>
-        </div>
-        <div class="card">
-          <strong>Compliance-Ready</strong>
-          <p class="muted">Best-practice encryption, least-privilege, and export controls.</p>
-        </div>
+  <!-- ROI Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold mb-6">See Your ROI in Real-Time</h2>
+      <p class="text-lg text-gray-600 mb-10">Track saved hours, new leads, and revenue impact with your live BeauxOS dashboard.</p>
+      <div class="bg-white rounded-2xl shadow p-10">
+        <p class="text-gray-400">[ Dashboard screenshot placeholder ]</p>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT / DEMO -->
-  <section id="contact" class="section">
-    <div class="container">
-      <h2>Book a Demo</h2>
-      <p class="lead">Tell us about your business. We’ll show your potential ROI live.</p>
-      <div class="grid" style="grid-template-columns:1.2fr .8fr">
-        <form id="demoForm" class="card-lg" onsubmit="return handleSubmit(event)">
-          <label for="name">Your name</label>
-          <input id="name" name="name" placeholder="Jane Doe" required />
-          <label for="email">Work email</label>
-          <input id="email" name="email" type="email" placeholder="you@company.com" required />
-          <label for="company">Company</label>
-          <input id="company" name="company" placeholder="Acme Dental" />
-          <label for="message">What would you like to automate first?</label>
-          <textarea id="message" name="message" placeholder="Missed call recapture, outreach, reminders…" rows="5"></textarea>
-
-          <div style="display:flex;gap:12px;align-items:center;margin-top:16px">
-            <button class="btn" type="submit">Request Demo</button>
-            <a class="btn ghost" href="mailto:justin@beaucollective.com?subject=BeauxOS%20Demo%20Request">Email Instead</a>
-          </div>
-          <p class="notice" style="margin-top:8px">Submits send to your email. You can swap to EmailJS/Formspree later for serverless delivery.</p>
-          <p id="formStatus" class="notice" style="display:none;margin-top:8px"></p>
-        </form>
-
-        <div class="card-lg">
-          <h3 style="margin-top:0">What you’ll see in the demo</h3>
-          <ul class="muted">
-            <li>• Live ROI dashboard</li>
-            <li>• AI outreach & missed-call recovery</li>
-            <li>• Booking/Calendar sync</li>
-            <li>• Data privacy controls</li>
-          </ul>
-          <div class="badge" style="margin-top:14px">Response time: under 24h</div>
-          <div class="badge" style="margin-top:8px">Serving: home services, clinics, booking-based, real estate</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container" style="display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap">
-      <div>© <span id="y"></span> BeauxOS • All rights reserved.</div>
-      <div class="muted">Built with privacy-first automation.</div>
+  <!-- Footer -->
+  <footer class="bg-white border-t py-8">
+    <div class="max-w-7xl mx-auto px-6 text-center text-gray-500">
+      <p>© 2025 BeauxOS. All rights reserved.</p>
     </div>
   </footer>
 
-  <script>
-    // Year
-    document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Simple client-side mailto fallback submit (no secrets needed)
-    // For production, switch to EmailJS (client key) or Formspree (no-code).
-    function handleSubmit(e){
-      e.preventDefault();
-      const s = document.getElementById('formStatus');
-      const data = new FormData(e.target);
-      const name = encodeURIComponent(data.get('name')||'');
-      const email = encodeURIComponent(data.get('email')||'');
-      const company = encodeURIComponent(data.get('company')||'');
-      const message = encodeURIComponent(data.get('message')||'');
-
-      // MAILTO fallback — opens the user’s mail client with a prefilled draft.
-      const subject = `BeauxOS Demo Request — ${decodeURIComponent(company||name)}`;
-      const body = `Name: ${decodeURIComponent(name)}%0AEmail: ${decodeURIComponent(email)}%0ACompany: ${decodeURIComponent(company)}%0A%0AI'd like help with:%0A${decodeURIComponent(message)}`;
-      window.location.href = `mailto:justin@beaucollective.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-
-      s.style.display='block';
-      s.textContent = 'Opening your email app… If nothing appears, click "Email Instead" or try from a desktop email client.';
-      return false;
-    }
-  </script>
 </body>
 </html>
