@@ -1,373 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>BeauxOS – AI for Business Autonomy</title>
-  <link rel="icon" type="image/png" href="https://img.icons8.com/ios/100/4a4e69/artificial-intelligence.png">
-  <meta name="description" content="BeauxOS—AI systems that automate, optimize, and future-proof your business. Trusted, secure, and built for growth.">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,400&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Montserrat', sans-serif;
-      background: #f8f9fb;
-      margin: 0;
-      color: #22223b;
-    }
-    header {
-      background: #fff;
-      padding: 2rem 0 1.5rem 0;
-      border-bottom: 1px solid #ededed;
-    }
-    .container {
-      width: 90%;
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-    .brand {
-      font-weight: 700;
-      font-size: 2.2rem;
-      color: #4a4e69;
-      letter-spacing: 1.5px;
-      text-decoration: none;
-    }
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: space-between;
-    }
-    .hero {
-      min-height: 75vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      background: linear-gradient(105deg, #fff 10%, #f2e9e4 100%);
-    }
-    .hero h1 {
-      font-size: 3rem;
-      letter-spacing: -1.5px;
-      font-weight: 700;
-      margin-bottom: 1rem;
-    }
-    .hero p {
-      font-size: 1.35rem;
-      color: #4a4e69;
-      max-width: 540px;
-      margin: 0 auto 2rem auto;
-    }
-    .cta-btn {
-      display: inline-block;
-      background: #4a4e69;
-      color: #fff;
-      font-weight: 600;
-      font-size: 1.12rem;
-      border: none;
-      border-radius: 8px;
-      padding: 0.85rem 2.25rem;
-      box-shadow: 0 2px 14px #ccc5b9c8;
-      margin-bottom: 2.5rem;
-      cursor: pointer;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .cta-btn:hover { background: #9a8c98; }
+// Landing Page (JSX/React-like pseudocode for easy adaptation)
 
-    /* Section headings */
-    h2.section-title { 
-      font-size: 2.2rem; 
-      font-weight: 700; 
-      color: #22223b; 
-      margin: 2.8rem 0 1.4rem 0; 
-      text-align: center;
-    }
-    .section { margin: 3rem 0; }
-
-    .cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 2rem;
-      justify-content: center;
-    }
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 2px 18px 0 #93939314;
-      padding: 2rem 1.6rem 1.4rem 1.6rem;
-      min-width: 250px;
-      max-width: 340px;
-      flex: 1;
-      text-align: center;
-      transition: transform 0.15s;
-    }
-    .card:hover { transform: translateY(-7px) scale(1.03); }
-    .card-icon { font-size: 2.5rem; color: #9a8c98; margin-bottom: 0.6rem; }
-    .card h3 { font-size: 1.25rem; margin-bottom: 0.7rem; }
-    .card p { color: #54536d; font-size: 1.03rem; margin-bottom: 0; }
-
-    /* BeauxBox Section */
-    .box-section {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 3rem;
-      background: #f2e9e4;
-      padding: 3.5rem 2rem;
-      border-radius: 20px;
-      margin: 2rem 0;
-      flex-wrap: wrap;
-    }
-    .box-img {
-      width: 130px;
-      height: 130px;
-      background: #22223b;
-      border-radius: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 4px 30px #4a4e696e;
-      font-size: 3.5rem;
-      color: #fff;
-      margin-bottom: 1.4rem;
-    }
-    .box-copy {max-width: 470px;}
-    .box-copy h3 {
-      font-size: 1.4rem;
-      font-weight: 600;
-      margin-bottom: 0.7rem;
-      color: #4a4e69;
-    }
-    .box-copy ul { margin: 0.75rem 0 0 0; }
-    .box-copy li { color: #22223b; font-size: 1.05rem; margin-bottom: 0.25rem; }
-
-    /* Tiers */
-    .tiers {display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;}
-    .plan {
-      background: #fff;
-      border-radius: 12px;
-      padding: 1.8rem 1.2rem 1.4rem 1.2rem;
-      box-shadow: 0 2px 12px 0 #cbc3bd25;
-      text-align: center;
-      min-width: 225px;
-      max-width: 300px;
-      flex: 1;
-    }
-    .plan h4 { font-size: 1.16rem; font-weight: 700; color: #4a4e69; margin-bottom: 0.3rem; }
-    .plan-price { font-size: 2rem; color: #22223b; font-weight: 700; margin-bottom: 0.5rem; }
-    .plan ul { list-style: none; padding: 0; margin: 0 0 0.7rem 0;}
-    .plan li { font-size: 1.01rem; color: #52527a; margin-bottom: 0.23rem;}
-    .plan .cta-btn {margin-top: 0.7rem;}
-
-    /* ROI Proof */
-    .testimonials, .roi {
-      background: #fff;
-      border-radius: 14px;
-      box-shadow: 0 2px 14px #bbb7b1c8;
-      padding: 2.1rem 1.7rem;
-      max-width: 560px;
-      margin: 2.5rem auto 1.2rem auto;
-      text-align: center;
-      color: #4a4e69;
-    }
-
-    .roi-title {
-      font-size: 1.22rem;
-      font-weight: 700;
-      margin-bottom: 0.7rem;
-      color: #22223b;
-    }
-    .roi-details {
-      font-size: 1.08rem;
-      color: #353553;
-    }
-
-    /* Contact Form */
-    .contact-section {
-      padding: 2.2rem 0 3rem 0;
-      text-align: center;
-    }
-    .contact-form {max-width: 360px; margin: 0 auto;}
-    .contact-form input, .contact-form textarea {
-      width: 100%;
-      padding: 0.9rem;
-      margin-bottom: 1rem;
-      border: 1px solid #cbc3bd;
-      border-radius: 7px;
-      font-size: 1rem;
-      background: #faf8fa;
-      color: #22223b;
-      resize: none;
-    }
-    .contact-form button { width: 100%; font-size: 1.1rem;}
-    .privacy { color: #858585; font-size: 0.97em; margin-top: 0.8em;}
-
-    /* Footer */
-    footer {
-      background: #22223b;
-      color: #f2e9e4;
-      padding: 2rem 0 1rem 0;
-      text-align: center;
-      font-size: 1.05rem;
-      letter-spacing: 0.7px;
-      border-radius: 0 0 14px 14px;
-    }
-    footer a { color: #fff; text-decoration: underline;}
-    @media (max-width: 900px){
-      .cards, .tiers {flex-direction: column;}
-      .hero h1 {font-size: 2.1rem;}
-    }
-  </style>
-</head>
-<body>
+<main>
   <header>
-    <div class="container">
-      <nav>
-        <a class="brand" href="#">BeauxOS</a>
-        <a href="#contact" class="cta-btn">Book a Demo</a>
-      </nav>
-    </div>
+    <h1>BeauxOS – The AI Operating System for Business Growth</h1>
+    <p>
+      Supercharge revenue, streamline ops, and future-proof your company with BeauxOS:
+      the first plug-and-play AI platform for sales, service, and complete automation.
+    </p>
+    <a href="#contact" className="cta">Book a Demo</a>
+    <a href="#plans" className="cta secondary">See Plans</a>
   </header>
-
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <h1>AI Autonomy, Delivered</h1>
-      <p>BeauxOS automates, optimizes, and future-proofs your business. Data-private, self-improving and ready for growth, our “data box” system puts your entire operation on autopilot, while you watch the ROI in real time.</p>
-      <a href="#contact" class="cta-btn">Start My AI Transformation</a>
-    </div>
+  <section className="how-it-works">
+    <h2>How It Works</h2>
+    <ol>
+      <li><b>Quick Setup:</b> Connect email, phone, and calendar—onboard in minutes.</li>
+      <li><b>Instant Automation:</b> AI activates lead gen, follow-up, reporting, reminders.</li>
+      <li><b>Live Results:</b> Real-time analytics, automated revenue recapture, and proof of ROI.</li>
+    </ol>
+    <img src="/images/plug-play-diagram.png" alt="Plug and Play Diagram" />
   </section>
-
-  <!-- Services -->
-  <section class="section">
-    <h2 class="section-title">Core Capabilities</h2>
-    <div class="container cards">
-      <div class="card">
-        <div class="card-icon">&#128222;</div>
-        <h3>AI Call Listening & Feedback</h3>
-        <p>Transcribe and analyze calls, turbocharge sales & support in real time.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">&#128197;</div>
-        <h3>Automated Reminders & Messaging</h3>
-        <p>Reduce admin work 30–50% with smart text and email automations.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">&#129302;</div>
-        <h3>AI Chatbots & Phone Bots</h3>
-        <p>Handle 70%+ of routine inquiries autonomously, 24/7, across channels.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">&#128200;</div>
-        <h3>ROI Dashboard & Analytics</h3>
-        <p>Track hours saved, leads gained, bookings, and revenue—live and transparent.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">&#128176;</div>
-        <h3>AI Lead Engine</h3>
-        <p>Find and reach new prospects for you—always on, always improving.</p>
-      </div>
-      <div class="card">
-        <div class="card-icon">&#9881;</div>
-        <h3>Full Business Integration</h3>
-        <p>Plug BeauxOS into any app or workflow. Scale to full autonomy as you grow.</p>
-      </div>
-    </div>
+  <section className="features">
+    <h2>Why BeauxOS?</h2>
+    <ul>
+      <li><b>AI Call Coaching & Insights:</b> Real-time transcription, auto-feedback, and performance analytics.</li>
+      <li><b>AI-Driven Outreach:</b> Finds leads, personalizes messaging, follows up, and even books meetings.</li>
+      <li><b>Revenue & Ops Dashboard:</b> See live conversion gains, hours saved, and ROI delivered.</li>
+      <li><b>Automated Reminders:</b> Up to 50% admin time reduction, fewer no-shows, and 24/7 client nurture.</li>
+      <li><b>Full Integration:</b> Works with your favorite tools (Gmail, Outlook, Twilio, etc.)</li>
+      <li><b>Enterprise-Grade Privacy:</b> SOC2-ready, encrypted, and private by design.</li>
+    </ul>
   </section>
-
-  <!-- BeauxBox Data Privacy & Automation -->
-  <section class="container section box-section">
-    <div class="box-img"><span>&#128230;</span></div>
-    <div class="box-copy">
-      <h3>The BeauxBox™ Advantage</h3>
+  <section className="plans" id="plans">
+    <h2>Pricing & Tiers</h2>
+    <div className="plan enterprise">
+      <h3>Enterprise Autonomy <span>(Starts at $30,000/mo)</span></h3>
       <ul>
-        <li><strong>Private “Data Box”</strong>: Your operations and customer data stay encrypted, isolated, and owned entirely by you.</li>
-        <li><strong>Autonomous AI</strong>: Each BeauxBox learns your systems, automates, self-improves.</li>
-        <li><strong>Plug & Play</strong>: New client? Spin up a fresh BeauxBox—rapid onboarding, instant ROI tracking.</li>
-        <li><strong>Export anytime</strong>: Take your box (and automations) with you. Full control, zero lock-in.</li>
+        <li>Full white-label AI agent, unlimited workflow automations</li>
+        <li>Enterprise integrations: CRM, ERP, payments, compliance</li>
+        <li>Custom onboarding automation for teams/locations</li>
+        <li>Dedicated AI workspace for client success</li>
+        <li>On-prem/private cloud—your choice</li>
+        <li>Executive dashboards & priority support</li>
       </ul>
+      <a href="#contact" className="cta">Book Enterprise Consult</a>
     </div>
-  </section>
-
-  <!-- Pricing Tiers -->
-  <section class="section">
-    <h2 class="section-title">Plans & Pricing</h2>
-    <div class="container tiers">
-      <div class="plan">
-        <h4>Essentials</h4>
-        <div class="plan-price">$2,500<span style="font-size:1rem;">/mo</span></div>
-        <ul>
-          <li>Reminders, Messaging</li>
-          <li>Call Feedback/Transcription</li>
-          <li>ROI Dashboard (Live)</li>
-        </ul>
-        <a href="#contact" class="cta-btn">Start Essentials</a>
-      </div>
-      <div class="plan">
-        <h4>Growth</h4>
-        <div class="plan-price">$5,000<span style="font-size:1rem;">/mo</span></div>
-        <ul>
-          <li>All Essentials</li>
-          <li>Chatbot & Phonebot Automation</li>
-          <li>Lead Engine & Reporting</li>
-        </ul>
-        <a href="#contact" class="cta-btn">Start Growth</a>
-      </div>
-      <div class="plan">
-        <h4>Autonomy</h4>
-        <div class="plan-price">$8,000<span style="font-size:1rem;">/mo</span></div>
-        <ul>
-          <li>All Growth Benefits</li>
-          <li>Custom ML, Workflow Builder</li>
-          <li>Private BeauxBox, Priority Support</li>
-        </ul>
-        <a href="#contact" class="cta-btn">Start Autonomy</a>
-      </div>
-      <div class="plan" style="border: 2px solid #eab96f;">
-        <h4>Full Integration</h4>
-        <div class="plan-price">from $12k/mo</div>
-        <ul>
-          <li>Enterprise Automation</li>
-          <li>Executive Dashboards</li>
-          <li>On-prem/Private Cloud</li>
-          <li>Dedicated Success Team</li>
-        </ul>
-        <a href="#contact" class="cta-btn">Book Consult</a>
-      </div>
+    <div className="plan growth">
+      <h3>Growth Automation <span>($10,000–15,000/mo)</span></h3>
+      <ul>
+        <li>Missed lead automation, AI outreach, smart reminders</li>
+        <li>Smart pipelines, analytics, and client-facing portal</li>
+        <li>Automated booking, follow-ups, and performance metrics</li>
+      </ul>
+      <a href="#contact" className="cta">Start Growth Plan</a>
     </div>
-    <div style="text-align:center; margin-top:1rem;"><small>*Startup fee $750–2k may apply. All plans show live ROI before you scale up.</small></div>
-  </section>
-
-  <!-- ROI Proof / Testimonials (Demo) -->
-  <div class="container section roi">
-    <div class="roi-title">BeauxOS in Action</div>
-    <div class="roi-details">
-      <strong>44% more leads</strong> in month one. <br>
-      <strong>12 admin hours saved</strong> weekly. <br>
-      <strong>80% of calls handled </strong> by smart virtual agents.<br>
-      <i>"Best decision we made. We were running on autopilot after 2 weeks." <br>– Clinic Owner</i>
+    <div className="plan core">
+      <h3>Core Essentials <span>($2,500/mo)</span></h3>
+      <ul>
+        <li>AI call transcriptions & feedback</li>
+        <li>Automated admin reminders & reporting</li>
+        <li>Basic ROI dashboard, integrated communications</li>
+      </ul>
+      <a href="#contact" className="cta">Start Essentials</a>
     </div>
-  </div>
-  
-  <!-- Contact -->
-  <section class="contact-section" id="contact">
-    <h2 class="section-title">Start Your Transformation</h2>
-    <p>We're happy to answer your questions or schedule a private demo. Your data is 100% private—always.</p>
-    <form class="contact-form" action="https://formspree.io/f/mvolwkra" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <input type="text" name="company" placeholder="Your Company (Optional)">
-      <textarea name="message" placeholder="How can BeauxOS help you?" rows="3"></textarea>
-      <button type="submit" class="cta-btn">Request Info or Demo</button>
-      <div class="privacy">*We reply within 1 business day. Data never shared. Learn more in our <a href="#">Privacy Policy</a>.</div>
-    </form>
+    <small>*Startup fee $750–2k may apply. Custom terms for <b>multi-location or high-volume</b> accounts.</small>
   </section>
-  
-  <!-- Footer -->
-  <footer>
-    <div>BeauxOS &copy; 2025 &bull; <a href="mailto:justinatchley3@gmail.com">Contact Founder</a></div>
-    <div style="margin-top:7px;font-size:0.93em;">AI-Driven. Privacy First. Built for Business Growth.</div>
-  </footer>
-</body>
-</html>
+  <section className="proof">
+    <h2>Proven Results—For Us and Our Clients</h2>
+    <ul>
+      <li><b>44% more leads closed</b> in month one</li>
+      <li><b>80% of calls</b> handled by AI agent</li>
+      <li><b>12+ admin hours saved weekly</b> per client</li>
+      <li>You see this system in action—the same AI we use for our own outreach, followup, and client acquisition</li>
+    </ul>
+    <blockquote>
+      “Best decision we made. We were running on autopilot after 2 weeks.”
+      <br />– Clinic Owner, Client
+    </blockquote>
+  </section>
+  <section className="contact" id="contact">
+    <h2>Start Your Transformation Today</h2>
+    <form>
+      <label>
+        Your Name
+        <input required type="text" />
+      </label>
+      <label>
+        Your Email
+        <input required type="email" />
+      </label>
+      <label>
+        Company (optional)
+        <input type="text" />
