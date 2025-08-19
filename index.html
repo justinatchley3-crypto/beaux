@@ -1,93 +1,283 @@
-// Landing Page (JSX/React-like pseudocode for easy adaptation)
-
-<main>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BeauxOS – AI Operating System for Business Autonomy</title>
+  <meta name="description" content="Plug-and-play AI platform for automating revenue, outreach, analytics, reminders, and more. Book a demo with BeauxOS.">
+  <link rel="icon" href="/favicon.ico" />
+  <style>
+    body {
+      font-family: 'Inter', Arial, sans-serif;
+      background: #f6f7fa;
+      color: #1b2530;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      padding: 2.6rem 0 2.1rem;
+      background: #fff;
+      border-bottom: 1px solid #e5e7eb;
+      text-align: center;
+    }
+    header h1 {
+      font-size: 2.4rem;
+      font-weight: 800;
+      margin: 0 0 1rem;
+    }
+    header p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      font-size: 1.2rem;
+      color: #42506b;
+    }
+    .cta, .cta-secondary {
+      display: inline-block;
+      padding: 12px 32px;
+      margin: 0 10px 8px 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.18s;
+    }
+    .cta {
+      background: #2563eb;
+      color: #fff;
+    }
+    .cta:hover {
+      background: #1e40af;
+    }
+    .cta-secondary {
+      background: #e0e7ff;
+      color: #1e40af;
+    }
+    .cta-secondary:hover {
+      background: #bfdbfe;
+      color: #1e40af;
+    }
+    section {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      background: #fff;
+      border-radius: 14px;
+      padding: 2rem 2.3rem;
+      box-shadow: 0 3px 12px #dbeafe44;
+    }
+    section.plans {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 2.5rem 1rem;
+      max-width: 1100px;
+    }
+    .plan {
+      flex: 1 1 285px;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 14px;
+      box-shadow: 0 3px 12px #c7d2fe33;
+      min-width: 265px;
+      margin-bottom: 1.3rem;
+    }
+    .plan h3 {
+      font-size: 1.35rem;
+      margin-bottom: 10px;
+      font-weight: 700;
+    }
+    .plan span {
+      color: #6366f1;
+      font-size: 1rem;
+      font-weight: 500;
+    }
+    .plan ul {
+      margin-left: 1.1rem;
+      margin-bottom: 0.8rem;
+    }
+    .plan .cta, .plan .cta-secondary {
+      margin-top: 14px;
+      width: 100%;
+      text-align: center;
+      box-sizing: border-box;
+    }
+    /* Responsive */
+    @media (max-width: 950px) {
+      section.plans {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: stretch;
+      }
+    }
+    ul, ol {
+      font-size: 1.08rem;
+    }
+    ul[style], ol[style] { /* Remove bullets for columns */
+      list-style: none;
+      padding-left: 0;
+    }
+    blockquote {
+      background: #eff6ff;
+      padding: 1.1rem 1.4rem;
+      border-radius: 7px;
+      font-style: italic;
+      color: #36435a;
+    }
+    form input, form textarea {
+      width: 100%;
+      box-sizing: border-box;
+      font-size: 1.07rem;
+      padding: 8px;
+      margin-top: 3px;
+      margin-bottom: 18px;
+      border-radius: 5px;
+      border: 1px solid #cbd5e1;
+      background: #f6f8fa;
+    }
+    form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    form button {
+      padding: 12px 32px;
+      font-size: 1.12rem;
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    form button:hover {
+      background: #1e40af;
+    }
+    footer {
+      text-align: center;
+      color: #64748b;
+      font-size: 1rem;
+      margin-top: 3rem;
+      padding-bottom: 1.5rem;
+    }
+    footer a {
+      color: #1e40af;
+      text-decoration: none;
+    }
+    @media (max-width: 600px) {
+      section, .plan { padding-left: 0.8rem; padding-right: 0.8rem; }
+      .plan { min-width: 210px; }
+    }
+  </style>
+</head>
+<body>
   <header>
-    <h1>BeauxOS – The AI Operating System for Business Growth</h1>
+    <h1>BeauxOS – AI Operating System for Business Autonomy</h1>
     <p>
-      Supercharge revenue, streamline ops, and future-proof your company with BeauxOS:
-      the first plug-and-play AI platform for sales, service, and complete automation.
+      Boost revenue, cut costs, and future-proof your business with plug-and-play AI:
+      analytics, chatbots, reminders, lead gen, and self-improving automations.
     </p>
-    <a href="#contact" className="cta">Book a Demo</a>
-    <a href="#plans" className="cta secondary">See Plans</a>
+    <a href="#contact" class="cta">Book a Demo</a>
+    <a href="#plans" class="cta-secondary">See Plans</a>
   </header>
-  <section className="how-it-works">
-    <h2>How It Works</h2>
+
+  <section>
+    <h2>How BeauxOS Works</h2>
     <ol>
-      <li><b>Quick Setup:</b> Connect email, phone, and calendar—onboard in minutes.</li>
-      <li><b>Instant Automation:</b> AI activates lead gen, follow-up, reporting, reminders.</li>
-      <li><b>Live Results:</b> Real-time analytics, automated revenue recapture, and proof of ROI.</li>
+      <li><b>Quick Setup:</b> Connect your email, phone, and calendar in minutes.</li>
+      <li><b>Activate Automations:</b> AI starts lead gen, follow-up, and live analytics instantly.</li>
+      <li><b>Get Results:</b> See revenue uplift, conversion boosts, and workflow savings — automatically.</li>
     </ol>
-    <img src="/images/plug-play-diagram.png" alt="Plug and Play Diagram" />
   </section>
-  <section className="features">
-    <h2>Why BeauxOS?</h2>
-    <ul>
-      <li><b>AI Call Coaching & Insights:</b> Real-time transcription, auto-feedback, and performance analytics.</li>
-      <li><b>AI-Driven Outreach:</b> Finds leads, personalizes messaging, follows up, and even books meetings.</li>
-      <li><b>Revenue & Ops Dashboard:</b> See live conversion gains, hours saved, and ROI delivered.</li>
-      <li><b>Automated Reminders:</b> Up to 50% admin time reduction, fewer no-shows, and 24/7 client nurture.</li>
-      <li><b>Full Integration:</b> Works with your favorite tools (Gmail, Outlook, Twilio, etc.)</li>
-      <li><b>Enterprise-Grade Privacy:</b> SOC2-ready, encrypted, and private by design.</li>
+
+  <section>
+    <h2>Key Features</h2>
+    <ul style="columns:2; column-gap:32px; list-style:none; margin:0; padding:0;">
+      <li><b>Transcribe & Coach Calls:</b> Get insights and boost team performance.</li>
+      <li><b>AI-Powered Outreach:</b> Finds & nurtures leads, sends personalized messages, books meetings.</li>
+      <li><b>Chatbot/IVR Support:</b> Resolve 70%+ of inquiries 24/7, improving staff focus.</li>
+      <li><b>Automated Follow-ups:</b> Reduce no-shows, ensure fast lead recapture.</li>
+      <li><b>Revenue Dashboard:</b> Track live impact, admin hours saved, and conversion gains.</li>
+      <li><b>Enterprise Data Privacy:</b> SOC2-ready, encrypted by default.</li>
     </ul>
   </section>
-  <section className="plans" id="plans">
-    <h2>Pricing & Tiers</h2>
-    <div className="plan enterprise">
-      <h3>Enterprise Autonomy <span>(Starts at $30,000/mo)</span></h3>
+
+  <section class="plans" id="plans">
+    <div class="plan">
+      <h3>Enterprise Autonomy<br /><span>from $30,000/mo</span></h3>
       <ul>
-        <li>Full white-label AI agent, unlimited workflow automations</li>
-        <li>Enterprise integrations: CRM, ERP, payments, compliance</li>
-        <li>Custom onboarding automation for teams/locations</li>
-        <li>Dedicated AI workspace for client success</li>
-        <li>On-prem/private cloud—your choice</li>
-        <li>Executive dashboards & priority support</li>
+        <li>White-label AI sales &amp; client agent</li>
+        <li>Full workflow automation &amp; onboarding</li>
+        <li>ERP/CRM/payment integration</li>
+        <li>Dedicated AI workspace &amp; analytics</li>
+        <li>Custom security/privacy deployments</li>
       </ul>
-      <a href="#contact" className="cta">Book Enterprise Consult</a>
+      <a href="#contact" class="cta">Book Enterprise Consult</a>
     </div>
-    <div className="plan growth">
-      <h3>Growth Automation <span>($10,000–15,000/mo)</span></h3>
+    <div class="plan">
+      <h3>Growth Automation<br /><span>10–15k/mo</span></h3>
       <ul>
-        <li>Missed lead automation, AI outreach, smart reminders</li>
-        <li>Smart pipelines, analytics, and client-facing portal</li>
-        <li>Automated booking, follow-ups, and performance metrics</li>
+        <li>Automated lead recapture &amp; follow-up</li>
+        <li>AI reminders, booking, outreach</li>
+        <li>Comms, analytics, client portal</li>
+        <li>Performance reports and support</li>
       </ul>
-      <a href="#contact" className="cta">Start Growth Plan</a>
+      <a href="#contact" class="cta-secondary">Start Growth Plan</a>
     </div>
-    <div className="plan core">
-      <h3>Core Essentials <span>($2,500/mo)</span></h3>
+    <div class="plan">
+      <h3>Core Essentials<br /><span>2.5k/mo</span></h3>
       <ul>
-        <li>AI call transcriptions & feedback</li>
-        <li>Automated admin reminders & reporting</li>
-        <li>Basic ROI dashboard, integrated communications</li>
+        <li>AI call transcription/feedback</li>
+        <li>Admin reminders/alerts</li>
+        <li>Basic reporting &amp; dashboard</li>
       </ul>
-      <a href="#contact" className="cta">Start Essentials</a>
+      <a href="#contact" class="cta-secondary">Start Essentials</a>
     </div>
-    <small>*Startup fee $750–2k may apply. Custom terms for <b>multi-location or high-volume</b> accounts.</small>
   </section>
-  <section className="proof">
-    <h2>Proven Results—For Us and Our Clients</h2>
+
+  <section>
+    <h2>Proven Results—for Us & Our Clients</h2>
     <ul>
-      <li><b>44% more leads closed</b> in month one</li>
-      <li><b>80% of calls</b> handled by AI agent</li>
-      <li><b>12+ admin hours saved weekly</b> per client</li>
-      <li>You see this system in action—the same AI we use for our own outreach, followup, and client acquisition</li>
+      <li><b>44% more leads closed</b> in first month*</li>
+      <li><b>80%+ inbound calls and chat</b> handled by AI</li>
+      <li><b>12+ admin hours saved/week</b> per client</li>
+      <li>You see this live: AI running our outreach, follow-ups, and deals, so you know it works.</li>
     </ul>
     <blockquote>
-      “Best decision we made. We were running on autopilot after 2 weeks.”
-      <br />– Clinic Owner, Client
+      “Best investment we made. We were running on AI autopilot after 2 weeks.”<br />
+      <span style="color: #5a72b5;">– Clinic Owner, BeauxOS Client</span>
     </blockquote>
   </section>
-  <section className="contact" id="contact">
-    <h2>Start Your Transformation Today</h2>
-    <form>
+
+  <section id="contact" style="max-width:600px;">
+    <h2>Start Your AI Transformation</h2>
+    <form name="contact" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="contact" />
       <label>
         Your Name
-        <input required type="text" />
+        <input type="text" name="name" required />
       </label>
       <label>
         Your Email
-        <input required type="email" />
+        <input type="email" name="email" required />
       </label>
       <label>
-        Company (optional)
-        <input type="text" />
+        Company <small>(optional)</small>
+        <input type="text" name="company" />
+      </label>
+      <label>
+        How can BeauxOS help?
+        <textarea name="message" rows="3"></textarea>
+      </label>
+      <button type="submit">Request Info or Demo</button>
+    </form>
+    <p style="font-size:0.95rem;margin-top:12px;color: #64748b;">
+      <small>Your data is private. <a href="/privacy" style="color:#1e40af;">Privacy Policy</a></small>
+    </p>
+  </section>
+
+  <footer>
+    <p>BeauxOS © 2025 · <a href="mailto:justinatchley3@gmail.com">Contact Founder</a></p>
+    <p>AI-Driven. Privacy-First. Built for Growth.</p>
+  </footer>
+</body>
+</html>
