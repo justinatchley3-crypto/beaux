@@ -1,126 +1,312 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>BeauxOS – AI Automation for SMBs</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeauxOS - AI Integration for Modern Business</title>
+    <!-- Chosen Palette: Slate Gray, Ghost White, and Cornflower Blue -->
+    <!-- Application Structure Plan: The SPA is designed as a top-to-bottom narrative flow to guide potential clients. It starts with a strong value proposition in the hero section, identifies common business pain points, presents BeauxOS as the solution with a high-level architectural diagram, and then allows interactive exploration of core services through a clickable card interface. Each card reveals specific ROI-focused metrics via charts. This structure is chosen to first establish a shared problem, then present a comprehensive solution, and finally provide tangible, interactive proof of value for each service, building trust and encouraging a call to action. The flow concludes with sections on the underlying technology and a crucial emphasis on security to address primary business concerns. -->
+    <!-- Visualization & Content Choices: The application uses a combination of structured text, diagrams made with HTML/CSS, and dynamic charts to make the abstract concept of AI integration tangible. Key services are presented as interactive cards. For example: [Report Info: AI outreach agent] -> [Goal: Show lead generation value] -> [Viz: Bar Chart] -> [Interaction: Click card to reveal chart] -> [Justification: Visually quantifies the ROI in lead growth] -> [Library: Chart.js/Canvas]. [Report Info: AI chatbots/receptionists] -> [Goal: Demonstrate improved efficiency] -> [Viz: Doughnut Chart] -> [Interaction: Click card] -> [Justification: Shows clear metric for improved customer satisfaction/reduced workload] -> [Library: Chart.js/Canvas]. This approach avoids overwhelming users, making complex services understandable at a glance. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+        .section-hidden { display: none; }
+        .chart-container { position: relative; width: 100%; max-width: 600px; margin-left: auto; margin-right: auto; height: 300px; max-height: 350px; }
+        .service-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
+        .active-card { transform: translateY(-5px); box-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.2), 0 4px 6px -2px rgba(99, 102, 241, 0.1); border-color: #6366f1; }
+    </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-slate-50 text-slate-800">
 
-  <!-- Hero Section -->
-  <section class="bg-white">
-    <div class="max-w-7xl mx-auto px-6 py-20 text-center">
-      <h1 class="text-5xl font-bold mb-6">Future-Proof Your Business with <span class="text-blue-600">BeauxOS</span></h1>
-      <p class="text-lg text-gray-600 mb-8">AI-powered automation that saves hours, fills schedules, and scales your revenue — without extra staff.</p>
-      <a href="#pricing" class="px-8 py-4 bg-blue-600 text-white rounded-xl shadow hover:bg-blue-700 transition">Book a Demo</a>
-    </div>
-  </section>
+    <header class="bg-white/80 backdrop-blur-lg sticky top-0 z-50 border-b border-slate-200">
+        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-2xl font-bold text-indigo-600">BeauxOS</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="#services" class="text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="#how-it-works" class="text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">How It Works</a>
+                        <a href="#security" class="text-slate-600 hover:bg-indigo-50 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium">Security</a>
+                        <a href="#contact" class="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium shadow">Book a Discovery Call</a>
+                    </div>
+                </div>
+                 <div class="md:hidden">
+                    <a href="#contact" class="bg-indigo-600 text-white hover:bg-indigo-700 px-4 py-2 rounded-md text-sm font-medium shadow">Contact</a>
+                </div>
+            </div>
+        </nav>
+    </header>
 
-  <!-- Features Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="max-w-6xl mx-auto px-6">
-      <h2 class="text-3xl font-bold text-center mb-12">Why Businesses Choose BeauxOS</h2>
-      <div class="grid md:grid-cols-3 gap-10">
-        <div class="p-6 bg-white rounded-2xl shadow">
-          <h3 class="text-xl font-semibold mb-3">Save Time</h3>
-          <p class="text-gray-600">Cut 10–20 hours/week of admin with reminders, booking automation, and AI summaries.</p>
+    <main>
+        <section id="hero" class="py-24 md:py-32 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight">
+                    Integrate Intelligence. <span class="text-indigo-600">Amplify Your ROI.</span>
+                </h1>
+                <p class="mt-6 max-w-2xl mx-auto text-lg text-slate-600">
+                    BeauxOS is your dedicated partner in deploying bespoke AI systems that drive real, measurable growth. We build and manage AI solutions that automate tasks, generate leads, and create unparalleled efficiency, ensuring a high-return, low-churn future for your business.
+                </p>
+                <div class="mt-10">
+                    <a href="#services" class="bg-indigo-600 text-white hover:bg-indigo-700 px-8 py-3 rounded-md text-lg font-medium shadow-lg transform hover:scale-105 transition-transform">Explore Our AI Solutions</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="py-20 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-slate-900">Your Business, Supercharged by AI</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-slate-600">
+                        We don't just provide software; we integrate a strategic AI core into your existing operations. Our process is designed for seamless adoption and maximum impact, transforming your business processes into intelligent, automated workflows.
+                    </p>
+                </div>
+                <div class="mt-16 flex flex-col md:flex-row items-center justify-center space-y-8 md:space-y-0 md:space-x-8 text-center">
+                    <div class="bg-white p-6 rounded-lg shadow-md w-full md:w-1/4">
+                        <div class="text-3xl">🏢</div>
+                        <h3 class="mt-2 text-lg font-semibold">Your Business Operations</h3>
+                        <p class="text-sm text-slate-500">Sales, Support, Scheduling, Marketing</p>
+                    </div>
+                    <div class="text-4xl text-indigo-400 font-thin animate-pulse">&rarr;</div>
+                    <div class="bg-indigo-600 text-white p-8 rounded-xl shadow-2xl w-full md:w-1/3 ring-4 ring-indigo-200">
+                        <div class="text-4xl">✨</div>
+                        <h3 class="mt-2 text-2xl font-bold">BeauxOS AI Core</h3>
+                        <p class="text-sm text-indigo-200">Custom Models, Automation, Analytics & Security</p>
+                    </div>
+                    <div class="text-4xl text-indigo-400 font-thin animate-pulse">&rarr;</div>
+                    <div class="bg-white p-6 rounded-lg shadow-md w-full md:w-1/4">
+                        <div class="text-3xl">📈</div>
+                        <h3 class="mt-2 text-lg font-semibold">Measurable Growth</h3>
+                        <p class="text-sm text-slate-500">Higher ROI, Lower Churn, Peak Efficiency</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="services" class="py-20 md:py-24 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold text-slate-900">A Solution for Every Business Need</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-slate-600">
+                        Click on a service to see how BeauxOS can revolutionize different aspects of your business. Each solution comes with a dedicated analytics view in your client dashboard.
+                    </p>
+                </div>
+                <div class="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                    <div class="service-card cursor-pointer p-6 bg-slate-50/50 rounded-lg border border-slate-200" data-service="growth">
+                        <h3 class="text-xl font-bold text-indigo-600">AI-Powered Growth Engine</h3>
+                        <p class="mt-2 text-slate-600">Automate lead generation from research to personalized outreach. Our AI agents find potential customers, gather data, and initiate contact with tailored messaging.</p>
+                    </div>
+                    <div class="service-card cursor-pointer p-6 bg-slate-50/50 rounded-lg border border-slate-200" data-service="support">
+                        <h3 class="text-xl font-bold text-indigo-600">Intelligent Customer Support</h3>
+                        <p class="mt-2 text-slate-600">Deploy AI receptionists and chatbots that resolve queries 24/7. Enhance customer satisfaction and free up your team for high-value interactions.</p>
+                    </div>
+                    <div class="service-card cursor-pointer p-6 bg-slate-50/50 rounded-lg border border-slate-200" data-service="operations">
+                        <h3 class="text-xl font-bold text-indigo-600">Operational Automation</h3>
+                        <p class="mt-2 text-slate-600">Streamline your daily tasks with AI-driven smart scheduling, email processing, and client follow-ups. Eliminate manual work and reduce operational friction.</p>
+                    </div>
+                </div>
+
+                <div id="service-details" class="mt-16">
+                    <div id="growth-details" class="service-details-content section-hidden p-8 bg-white rounded-lg shadow-xl border border-slate-200">
+                        <h3 class="text-2xl font-bold text-center">Dashboard View: Growth Engine ROI</h3>
+                        <p class="text-center text-slate-600 mt-2 mb-6">Track qualified leads generated by your AI agent in real-time.</p>
+                        <div class="chart-container">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                    </div>
+                    <div id="support-details" class="service-details-content section-hidden p-8 bg-white rounded-lg shadow-xl border border-slate-200">
+                        <h3 class="text-2xl font-bold text-center">Dashboard View: Support Efficiency</h3>
+                         <p class="text-center text-slate-600 mt-2 mb-6">Monitor automated ticket resolution and customer satisfaction scores.</p>
+                        <div class="chart-container">
+                            <canvas id="supportChart"></canvas>
+                        </div>
+                    </div>
+                    <div id="operations-details" class="service-details-content section-hidden p-8 bg-white rounded-lg shadow-xl border border-slate-200">
+                        <h3 class="text-2xl font-bold text-center">Dashboard View: Hours Saved</h3>
+                        <p class="text-center text-slate-600 mt-2 mb-6">Visualize the cumulative manual hours saved across your organization.</p>
+                        <div class="chart-container">
+                            <canvas id="operationsChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="security" class="py-20 md:py-24">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                 <div class="text-center">
+                    <h2 class="text-3xl font-bold text-slate-900">Security & Privacy by Design</h2>
+                    <p class="mt-4 max-w-3xl mx-auto text-slate-600">
+                        Your data is your most valuable asset. We build our systems on an enterprise-grade foundation to ensure your sensitive information is always protected. Client trust is the cornerstone of our service.
+                    </p>
+                </div>
+                <div class="mt-12 grid md:grid-cols-3 gap-8 text-center">
+                    <div class="bg-white p-8 rounded-lg shadow-md border">
+                        <div class="text-4xl">🔒</div>
+                        <h3 class="mt-4 text-xl font-semibold">API-Level Privacy</h3>
+                        <p class="mt-2 text-slate-600">We exclusively use secure, business-tier APIs from leading AI providers. Your data is never used for training models, guaranteeing confidentiality.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md border">
+                        <div class="text-4xl">🛡️</div>
+                        <h3 class="mt-4 text-xl font-semibold">End-to-End Encryption</h3>
+                        <p class="mt-2 text-slate-600">All data, whether at rest in our secure cloud infrastructure or in transit, is protected with industry-standard encryption protocols.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md border">
+                        <div class="text-4xl">☁️</div>
+                        <h3 class="mt-4 text-xl font-semibold">Reputable Cloud Infrastructure</h3>
+                        <p class="mt-2 text-slate-600">Our services are hosted on major, compliant cloud platforms like AWS and GCP, providing world-class physical and network security.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 md:py-32 bg-indigo-700 text-white">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-4xl font-bold">Ready to See What AI Can Do for You?</h2>
+                <p class="mt-4 text-indigo-200 text-lg">
+                    Let's schedule a complimentary discovery call. We'll ask targeted questions to understand your unique challenges and demonstrate exactly how a BeauxOS integration will generate a significant return on your investment.
+                </p>
+                <div class="mt-10">
+                    <a href="mailto:sales@beauxos.com" class="bg-white text-indigo-600 font-bold hover:bg-slate-100 px-10 py-4 rounded-md text-lg shadow-2xl transform hover:scale-105 transition-transform inline-block">Book Your Free Call</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-slate-800 text-slate-400">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8 text-center text-sm">
+            <p>&copy; 2025 BeauxOS. All rights reserved.</p>
+            <p class="mt-1">Pioneering the Future of AI in Business.</p>
         </div>
-        <div class="p-6 bg-white rounded-2xl shadow">
-          <h3 class="text-xl font-semibold mb-3">Win More Leads</h3>
-          <p class="text-gray-600">Automated follow-up and smart outreach ensures no call, form, or email goes unanswered.</p>
-        </div>
-        <div class="p-6 bg-white rounded-2xl shadow">
-          <h3 class="text-xl font-semibold mb-3">Proof of ROI</h3>
-          <p class="text-gray-600">Every client gets a live dashboard showing hours saved, leads captured, and revenue impact.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    </footer>
 
-  <!-- Pricing Section -->
-  <section id="pricing" class="py-20 bg-white">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-12">Choose Your Plan</h2>
-      <div class="grid md:grid-cols-4 gap-8">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const serviceCards = document.querySelectorAll('.service-card');
+            const detailSections = document.querySelectorAll('.service-details-content');
+            let activeCard = null;
+            let activeChart = null;
 
-        <!-- Essentials -->
-        <div class="p-8 bg-gray-50 rounded-2xl shadow flex flex-col">
-          <h3 class="text-2xl font-semibold mb-4">Essentials</h3>
-          <p class="text-3xl font-bold mb-6">$1,750<span class="text-base font-normal">/mo</span></p>
-          <ul class="text-gray-600 mb-6 space-y-3 text-left">
-            <li>✔ Missed call & form follow-up</li>
-            <li>✔ Booking/calendar sync</li>
-            <li>✔ Appointment reminders</li>
-            <li>✔ AI call/meeting summaries</li>
-          </ul>
-          <a href="#" class="mt-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Get Started</a>
-        </div>
+            const charts = {};
 
-        <!-- Growth -->
-        <div class="p-8 bg-gray-50 rounded-2xl shadow-lg border-2 border-blue-600 flex flex-col">
-          <h3 class="text-2xl font-semibold mb-4 text-blue-600">Growth</h3>
-          <p class="text-3xl font-bold mb-6">$4,500<span class="text-base font-normal">/mo</span></p>
-          <ul class="text-gray-600 mb-6 space-y-3 text-left">
-            <li>✔ Everything in Essentials</li>
-            <li>✔ AI-powered lead gen & outreach</li>
-            <li>✔ Website chatbot (FAQ, booking, capture)</li>
-            <li>✔ Analytics dashboard</li>
-            <li>✔ No-show/cancellation automations</li>
-          </ul>
-          <a href="#" class="mt-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Most Popular</a>
-        </div>
+            function createGrowthChart() {
+                const ctx = document.getElementById('growthChart').getContext('2d');
+                return new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Q1', 'Q2', 'Q3 (w/ BeauxOS)', 'Q4'],
+                        datasets: [{
+                            label: 'Qualified Leads per Quarter',
+                            data: [120, 135, 450, 480],
+                            backgroundColor: 'rgba(99, 102, 241, 0.6)',
+                            borderColor: 'rgba(99, 102, 241, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true, grace: '5%' } },
+                        plugins: { legend: { display: false }, title: { display: true, text: 'Lead Generation Impact' } }
+                    }
+                });
+            }
 
-        <!-- Pro -->
-        <div class="p-8 bg-gray-50 rounded-2xl shadow flex flex-col">
-          <h3 class="text-2xl font-semibold mb-4">Pro</h3>
-          <p class="text-3xl font-bold mb-6">$8,500<span class="text-base font-normal">/mo</span></p>
-          <ul class="text-gray-600 mb-6 space-y-3 text-left">
-            <li>✔ Everything in Growth</li>
-            <li>✔ Multi-channel follow-up (SMS/email/phone)</li>
-            <li>✔ Lead scraping & ICP targeting</li>
-            <li>✔ AI scheduling assistant</li>
-            <li>✔ Branded analytics & ROI reports</li>
-            <li>✔ Internal AI knowledge base</li>
-          </ul>
-          <a href="#" class="mt-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Scale with Pro</a>
-        </div>
+            function createSupportChart() {
+                const ctx = document.getElementById('supportChart').getContext('2d');
+                return new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Resolved by AI', 'Escalated to Human'],
+                        datasets: [{
+                            data: [82, 18],
+                            backgroundColor: ['rgba(99, 102, 241, 0.6)', 'rgba(203, 213, 225, 0.6)'],
+                            borderColor: ['rgba(99, 102, 241, 1)', 'rgba(203, 213, 225, 1)'],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: { legend: { position: 'top' }, title: { display: true, text: '82% of Inquiries Resolved Automatically' } }
+                    }
+                });
+            }
 
-        <!-- Enterprise -->
-        <div class="p-8 bg-gray-50 rounded-2xl shadow flex flex-col">
-          <h3 class="text-2xl font-semibold mb-4">Enterprise</h3>
-          <p class="text-3xl font-bold mb-6">Custom<span class="text-base font-normal">/mo</span></p>
-          <ul class="text-gray-600 mb-6 space-y-3 text-left">
-            <li>✔ Everything in Pro</li>
-            <li>✔ White-label & branding</li>
-            <li>✔ Team onboarding automation</li>
-            <li>✔ Cross-location reporting</li>
-            <li>✔ Private cloud/on-prem deployment</li>
-          </ul>
-          <a href="#" class="mt-auto px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Contact Sales</a>
-        </div>
+            function createOperationsChart() {
+                const ctx = document.getElementById('operationsChart').getContext('2d');
+                return new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [{
+                            label: 'Manual Hours Saved',
+                            data: [0, 50, 110, 180, 260, 350],
+                            fill: true,
+                            backgroundColor: 'rgba(99, 102, 241, 0.2)',
+                            borderColor: 'rgba(99, 102, 241, 1)',
+                            tension: 0.3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true } },
+                        plugins: { legend: { display: false }, title: { display: true, text: 'Cumulative Hours Saved This Year' } }
+                    }
+                });
+            }
 
-      </div>
-    </div>
-  </section>
+            serviceCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    const service = card.dataset.service;
+                    const targetDetail = document.getElementById(`${service}-details`);
 
-  <!-- ROI Section -->
-  <section class="py-20 bg-gray-50">
-    <div class="max-w-6xl mx-auto px-6 text-center">
-      <h2 class="text-3xl font-bold mb-6">See Your ROI in Real-Time</h2>
-      <p class="text-lg text-gray-600 mb-10">Track saved hours, new leads, and revenue impact with your live BeauxOS dashboard.</p>
-      <div class="bg-white rounded-2xl shadow p-10">
-        <p class="text-gray-400">[ Dashboard screenshot placeholder ]</p>
-      </div>
-    </div>
-  </section>
+                    if (activeCard === card) {
+                        targetDetail.classList.add('section-hidden');
+                        card.classList.remove('active-card');
+                        activeCard = null;
+                        return;
+                    }
+                    
+                    if (activeCard) {
+                        activeCard.classList.remove('active-card');
+                    }
+                    
+                    card.classList.add('active-card');
+                    activeCard = card;
 
-  <!-- Footer -->
-  <footer class="bg-white border-t py-8">
-    <div class="max-w-7xl mx-auto px-6 text-center text-gray-500">
-      <p>© 2025 BeauxOS. All rights reserved.</p>
-    </div>
-  </footer>
+                    detailSections.forEach(section => {
+                        section.classList.add('section-hidden');
+                    });
 
+                    targetDetail.classList.remove('section-hidden');
+                    targetDetail.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                    if (activeChart) {
+                       activeChart.destroy();
+                    }
+                    
+                    if (service === 'growth') {
+                       if (charts.growth) charts.growth.destroy();
+                       charts.growth = createGrowthChart();
+                    } else if (service === 'support') {
+                        if (charts.support) charts.support.destroy();
+                        charts.support = createSupportChart();
+                    } else if (service === 'operations') {
+                        if (charts.operations) charts.operations.destroy();
+                        charts.operations = createOperationsChart();
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
