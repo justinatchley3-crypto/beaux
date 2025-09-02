@@ -46,6 +46,12 @@
             border: 2px solid #3b82f6;
             transform: scale(1.05);
         }
+        #audit-result ul {
+            list-style-position: inside;
+        }
+        #audit-result ul li {
+            margin-bottom: 0.5rem;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -121,9 +127,37 @@
         </div>
     </section>
 
+    <!-- NEW: Gemini API Powered Section -->
+    <section class="py-20 bg-white">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold">✨ AI-Powered Growth Audit</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-4">Enter your business details below to get an instant, AI-generated analysis of how BeauxOS can solve your most expensive problem.</p>
+            </div>
+            <div class="bg-gray-50 border border-gray-200 p-8 rounded-xl shadow-inner space-y-6">
+                <div>
+                    <label for="businessType" class="block text-sm font-medium text-gray-700">Your Industry</label>
+                    <input type="text" id="businessType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="e.g., HVAC, Roofing, Plumbing">
+                </div>
+                <div>
+                    <label for="biggestChallenge" class="block text-sm font-medium text-gray-700">Your Single Biggest Operational Challenge</label>
+                    <textarea id="biggestChallenge" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="e.g., Missing calls after hours, spending too much time scheduling, forgetting to follow up with old leads"></textarea>
+                </div>
+                <div class="text-center">
+                    <button id="generateAuditBtn" class="cta-button bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg hover:bg-blue-700 disabled:bg-gray-400">
+                        Generate My Audit
+                    </button>
+                </div>
+            </div>
+            <div id="audit-result-container" class="mt-8 bg-white border border-gray-200 p-8 rounded-xl shadow-md hidden">
+                 <h3 class="text-2xl font-bold mb-4 text-gray-800">Your Custom Growth Blueprint:</h3>
+                 <div id="audit-result" class="text-gray-700 space-y-2 prose"></div>
+            </div>
+        </div>
+    </section>
+
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-white">
-        <!-- Pricing content remains the same... -->
+    <section id="pricing" class="py-20 bg-gray-50">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold">Your Growth Investment</h2>
@@ -195,7 +229,76 @@
             <p class="mt-8 text-gray-400">&copy; 2025 BeauxOS. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const generateAuditBtn = document.getElementById('generateAuditBtn');
+            const auditResultContainer = document.getElementById('audit-result-container');
+            const auditResult = document.getElementById('audit-result');
+            const businessTypeInput = document.getElementById('businessType');
+            const biggestChallengeInput = document.getElementById('biggestChallenge');
 
+            generateAuditBtn.addEventListener('click', async () => {
+                const businessType = businessTypeInput.value.trim();
+                const biggestChallenge = biggestChallengeInput.value.trim();
+
+                if (!businessType || !biggestChallenge) {
+                    alert('Please fill out both fields to generate your audit.');
+                    return;
+                }
+
+                generateAuditBtn.disabled = true;
+                generateAuditBtn.textContent = 'Generating...';
+                auditResultContainer.classList.add('hidden');
+
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+                const systemPrompt = "Act as a world-class AI business strategist for the home service industry. Your tone is authoritative, professional, and focuses on tangible business outcomes. Do not use fluff or marketing jargon. Provide a concise, powerful analysis in 3-4 bullet points. Each bullet point should be a single, impactful sentence. The final output should be only the bullet points in markdown list format.";
+
+                const userQuery = `A potential client runs a ${businessType} company. Their single biggest operational challenge is: "${biggestChallenge}". Explain how a fully managed, autonomous AI operating system can solve this exact problem and generate a significant ROI. Focus on the outcome, not the technology.`;
+
+                const payload = {
+                    contents: [{ parts: [{ text: userQuery }] }],
+                    systemInstruction: {
+                        parts: [{ text: systemPrompt }]
+                    },
+                };
+                
+                try {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (!response.ok) {
+                        throw new Error(`API error: ${response.statusText}`);
+                    }
+
+                    const result = await response.json();
+                    const candidate = result.candidates?.[0];
+
+                    if (candidate && candidate.content?.parts?.[0]?.text) {
+                        const text = candidate.content.parts[0].text;
+                        // Basic markdown to HTML conversion for lists
+                        let htmlResult = text.replace(/\* /g, '<ul><li>').replace(/\n/g, '</li><li>') + '</li></ul>';
+                        htmlResult = htmlResult.replace(/<li><\/ul>/, '</ul>'); // Clean up potential empty last item
+                        auditResult.innerHTML = htmlResult;
+                        auditResultContainer.classList.remove('hidden');
+                    } else {
+                        throw new Error('No valid content received from API.');
+                    }
+                } catch (error) {
+                    console.error('Error generating audit:', error);
+                    auditResult.innerHTML = `<p class="text-red-500">We're sorry, but there was an error generating your report. Please try again shortly.</p>`;
+                    auditResultContainer.classList.remove('hidden');
+                } finally {
+                    generateAuditBtn.disabled = false;
+                    generateAuditBtn.textContent = 'Generate My Audit';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
 
