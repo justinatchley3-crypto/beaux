@@ -46,26 +46,6 @@
             border: 2px solid #3b82f6;
             transform: scale(1.05);
         }
-        #audit-result ul {
-            list-style-position: inside;
-        }
-        #audit-result ul li {
-            margin-bottom: 0.5rem;
-        }
-        /* New styles for the loader */
-        .loader {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #3b82f6;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            animation: spin 1s linear infinite;
-            margin: 20px auto;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
     </style>
 </head>
 <body class="antialiased">
@@ -141,41 +121,8 @@
         </div>
     </section>
 
-    <!-- NEW: Gemini API Powered Section -->
-    <section class="py-20 bg-white">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-bold">✨ AI-Powered Growth Audit</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto mt-4">Enter your business details below to get an instant, AI-generated analysis of how BeauxOS can solve your most expensive problem.</p>
-            </div>
-            <div class="bg-gray-50 border border-gray-200 p-8 rounded-xl shadow-inner space-y-6">
-                <div>
-                    <label for="businessType" class="block text-sm font-medium text-gray-700">Your Industry</label>
-                    <input type="text" id="businessType" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="e.g., HVAC, Roofing, Plumbing">
-                </div>
-                <div>
-                    <label for="biggestChallenge" class="block text-sm font-medium text-gray-700">Your Single Biggest Operational Challenge</label>
-                    <textarea id="biggestChallenge" rows="3" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm" placeholder="e.g., Missing calls after hours, spending too much time scheduling, forgetting to follow up with old leads"></textarea>
-                </div>
-                <div class="text-center">
-                    <button id="generateAuditBtn" class="cta-button bg-blue-600 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center mx-auto">
-                        <span id="btn-text">Generate My Audit</span>
-                        <svg id="btn-loader" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-            <div id="audit-result-container" class="mt-8 bg-white border border-gray-200 p-8 rounded-xl shadow-md hidden">
-                 <h3 class="text-2xl font-bold mb-4 text-gray-800">Your Custom Growth Blueprint:</h3>
-                 <div id="audit-result" class="text-gray-700 space-y-2 prose"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Pricing Section -->
-    <section id="pricing" class="py-20 bg-gray-50">
+    <section id="pricing" class="py-20 bg-white">
         <div class="container mx-auto px-6">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold">Your Growth Investment</h2>
@@ -228,7 +175,7 @@
         </div>
     </section>
 
-    <!-- NEW: Thesis Section -->
+    <!-- Thesis Section -->
     <section class="py-20 bg-gray-50">
         <div class="container mx-auto px-6 text-center">
             <h2 class="text-3xl md:text-4xl font-bold mb-4">Our Thesis</h2>
@@ -247,116 +194,7 @@
             <p class="mt-8 text-gray-400">&copy; 2025 BeauxOS. All rights reserved.</p>
         </div>
     </footer>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const generateAuditBtn = document.getElementById('generateAuditBtn');
-            const btnText = document.getElementById('btn-text');
-            const btnLoader = document.getElementById('btn-loader');
-            const auditResultContainer = document.getElementById('audit-result-container');
-            const auditResult = document.getElementById('audit-result');
-            const businessTypeInput = document.getElementById('businessType');
-            const biggestChallengeInput = document.getElementById('biggestChallenge');
 
-            generateAuditBtn.addEventListener('click', async () => {
-                const businessType = businessTypeInput.value.trim();
-                const biggestChallenge = biggestChallengeInput.value.trim();
-
-                if (!businessType || !biggestChallenge) {
-                    alert('Please fill out both fields to generate your audit.');
-                    return;
-                }
-
-                generateAuditBtn.disabled = true;
-                btnText.textContent = 'Generating...';
-                btnLoader.classList.remove('hidden');
-                auditResultContainer.classList.add('hidden');
-                auditResult.innerHTML = ''; // Clear previous results
-
-                const apiKey = "";
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
-
-                const systemPrompt = "Act as a world-class AI business strategist for the home service industry. Your tone is authoritative, professional, and focuses on tangible business outcomes. Do not use fluff or marketing jargon. Provide a concise, powerful analysis in 3-4 bullet points. Each bullet point should be a single, impactful sentence. The final output should be only the bullet points in markdown list format, starting each line with an asterisk (*).";
-
-                const userQuery = `A potential client runs a ${businessType} company. Their single biggest operational challenge is: "${biggestChallenge}". Explain how a fully managed, autonomous AI operating system can solve this exact problem and generate a significant ROI. Focus on the outcome, not the technology.`;
-
-                const payload = {
-                    contents: [{ parts: [{ text: userQuery }] }],
-                    systemInstruction: {
-                        parts: [{ text: systemPrompt }]
-                    },
-                };
-
-                // Exponential backoff for retries
-                let response;
-                let success = false;
-                for (let i = 0; i < 4; i++) { // Retry up to 3 times
-                    try {
-                        response = await fetch(apiUrl, {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify(payload)
-                        });
-
-                        if (response.status === 200) {
-                            success = true;
-                            break;
-                        } else if (response.status >= 500 || response.status === 429) {
-                            // Retry on server errors or rate limiting
-                            await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, i)));
-                        } else {
-                            // Don't retry on other client-side errors
-                            break; 
-                        }
-                    } catch (error) {
-                        // Network errors, retry
-                         await new Promise(resolve => setTimeout(resolve, 1000 * Math.pow(2, i)));
-                    }
-                }
-
-                if (!success || !response.ok) {
-                    console.error('API Error:', response ? `${response.status} ${response.statusText}` : 'Network error');
-                    auditResult.innerHTML = `<p class="text-red-500">We're sorry, but there was an error generating your report. Please try again shortly.</p>`;
-                    auditResultContainer.classList.remove('hidden');
-                    generateAuditBtn.disabled = false;
-                    btnText.textContent = 'Generate My Audit';
-                    btnLoader.classList.add('hidden');
-                    return;
-                }
-                
-                try {
-                    const result = await response.json();
-                    const candidate = result.candidates?.[0];
-
-                    if (candidate && candidate.content?.parts?.[0]?.text) {
-                        const text = candidate.content.parts[0].text;
-                        
-                        // More robust Markdown to HTML conversion
-                        const lines = text.split('\n').filter(line => line.trim().startsWith('*'));
-                        if (lines.length > 0) {
-                             const htmlResult = '<ul>' + lines.map(line => `<li>${line.trim().substring(1).trim()}</li>`).join('') + '</ul>';
-                             auditResult.innerHTML = htmlResult;
-                        } else {
-                             // Handle cases where the response is not a list
-                             auditResult.innerHTML = `<p>${text.replace(/\n/g, '<br>')}</p>`;
-                        }
-                       
-                        auditResultContainer.classList.remove('hidden');
-                    } else {
-                         // This case handles situations where the API response is OK but empty or malformed
-                        console.error('Invalid content received from API', result);
-                        throw new Error('No valid content received from API.');
-                    }
-                } catch (error) {
-                    console.error('Error processing audit:', error);
-                    auditResult.innerHTML = `<p class="text-red-500">We're sorry, but there was an error processing your report. Please try again shortly.</p>`;
-                    auditResultContainer.classList.remove('hidden');
-                } finally {
-                    generateAuditBtn.disabled = false;
-                    btnText.textContent = 'Generate My Audit';
-                    btnLoader.classList.add('hidden');
-                }
-            });
-        });
-    </script>
 </body>
 </html>
+
